@@ -23,6 +23,8 @@ public class MyModel extends Observable implements IModel {
     private Maze maze;
     private int characterPositionRow = 1;
     private int characterPositionColumn = 1;
+    private int goalPositionRow = 1;
+    private int goalPositionColumn = 1;
     private Server generateServer;
     private Server solveServer;
 
@@ -52,25 +54,31 @@ public class MyModel extends Observable implements IModel {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{50, 50};
+                        int[] mazeDimensions = new int[]{width, height};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
                         byte[] decompressedMaze = new byte[3000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
-                        Maze maze = new Maze(decompressedMaze);
-                        maze.print();
+                        Maze maze1 = new Maze(decompressedMaze);
+                        maze=maze1;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
             client.communicateWithServer();
-            notifyObservers();
+
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        characterPositionRow = maze.getStartPosition().getRowIndex();
+        characterPositionRow = maze.getStartPosition().getColumnIndex();
+        goalPositionRow = maze.getGoalPosition().getRowIndex();
+        goalPositionColumn = maze.getGoalPosition().getColumnIndex();
+        setChanged();
+        notifyObservers();
     }
 
     //private int[][] generateRandomMaze(int width, int height) {
@@ -117,5 +125,13 @@ public class MyModel extends Observable implements IModel {
     @Override
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
+    }
+
+    public int getGoalPositionColumn() {
+        return goalPositionColumn;
+    }
+
+    public int getGoalPositionRow() {
+        return goalPositionRow;
     }
 }

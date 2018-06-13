@@ -16,9 +16,13 @@ public class MyViewModel extends Observable implements Observer {
 
     private int characterPositionRowIndex;
     private int characterPositionColumnIndex;
+    private int goalPositionRowIndex;
+    private int goalPositionColumnIndex;
 
     public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
     public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
+    public StringProperty goalPositionRow = new SimpleStringProperty("1");
+    public StringProperty goalPositionColumn = new SimpleStringProperty("1");
 
     public MyViewModel(IModel model){
         this.model = model;
@@ -31,6 +35,11 @@ public class MyViewModel extends Observable implements Observer {
             characterPositionRow.set(characterPositionRowIndex + "");
             characterPositionColumnIndex = model.getCharacterPositionColumn();
             characterPositionColumn.set(characterPositionColumnIndex + "");
+            goalPositionRowIndex = model.getGoalPositionRow();
+            goalPositionRow.set(goalPositionRowIndex + "");
+            goalPositionColumnIndex = model.getGoalPositionColumn();
+            goalPositionColumn.set(goalPositionColumnIndex + "");
+
             setChanged();
             notifyObservers();
         }
@@ -54,5 +63,13 @@ public class MyViewModel extends Observable implements Observer {
 
     public int getCharacterPositionColumn() {
         return characterPositionColumnIndex;
+    }
+
+    public int getGoalPositionRowIndex() {
+        return goalPositionRowIndex;
+    }
+
+    public int getGoalPositionColumnIndex() {
+        return goalPositionColumnIndex;
     }
 }
