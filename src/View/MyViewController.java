@@ -58,7 +58,10 @@ public class MyViewController implements Observer, IView {
         mazeDisplayer.setMaze(maze.getM_arr());
         int positionRow = viewModel.getCharacterPositionRow();
         int positionColumn = viewModel.getCharacterPositionColumn();
+        int goalPositionRow = viewModel.getGoalPositionRowIndex();
+        int goalPositionColumn = viewModel.getGoalPositionColumnIndex();
         mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
+        mazeDisplayer.setGoalPosition(goalPositionRow, goalPositionColumn);
         this.characterPositionRow.set(positionRow + "");
         this.characterPositionColumn.set(positionColumn + "");
     }

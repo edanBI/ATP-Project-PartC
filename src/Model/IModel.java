@@ -9,4 +9,6 @@ public interface IModel {
     Maze getMaze();
     int getCharacterPositionRow();
     int getCharacterPositionColumn();
+    int getGoalPositionColumn();
+    int getGoalPositionRow();
 }

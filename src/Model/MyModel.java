@@ -22,6 +22,8 @@ public class MyModel extends Observable implements IModel {
     private int characterPositionColumn;
     private Server generateServer;
     private Server solveServer;
+    private int goalPositionRow;
+    private int goalPositionColumn;
 
     public MyModel() {
         //Raise the servers
@@ -62,8 +64,6 @@ public class MyModel extends Observable implements IModel {
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         m_maze = new Maze(decompressedMaze);
                         m_maze.print();
-                        characterPositionRow = m_maze.getStartPosition().getRowIndex();
-                        characterPositionColumn = m_maze.getStartPosition().getColumnIndex();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -73,6 +73,10 @@ public class MyModel extends Observable implements IModel {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        characterPositionRow = m_maze.getStartPosition().getRowIndex();
+        characterPositionColumn = m_maze.getStartPosition().getColumnIndex();
+        goalPositionRow = m_maze.getGoalPosition().getRowIndex();
+        goalPositionColumn = m_maze.getGoalPosition().getColumnIndex();
         setChanged();
         notifyObservers();
     }
@@ -160,5 +164,13 @@ public class MyModel extends Observable implements IModel {
     private boolean legal_move(int row, int col){
         return row>=0 && row<m_maze.getM_arr().length && col>=0 && col<m_maze.getM_arr()[0].length
                 && m_maze.getM_arr()[row][col]==0;
+    }
+
+    public int getGoalPositionColumn() {
+        return goalPositionColumn;
+    }
+
+    public int getGoalPositionRow() {
+        return goalPositionRow;
     }
 }

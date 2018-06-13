@@ -24,6 +24,8 @@ public class MazeDisplayer extends Canvas {
     private int[][] maze;
     private int characterPositionRow;
     private int characterPositionColumn;
+    private int goalPositionRow;
+    private int goalPositionColumn;
 
     public void setMaze(int[][] maze) {
         this.maze = maze;
@@ -41,6 +43,12 @@ public class MazeDisplayer extends Canvas {
     }
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
+    }
+
+    public void setGoalPosition (int row, int column) {
+        goalPositionRow = row;
+        goalPositionColumn = column;
+        redraw();
     }
 
     private void redraw() {
@@ -71,6 +79,7 @@ public class MazeDisplayer extends Canvas {
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
                 gc.drawImage(characterImage, characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
+                gc.drawImage(characterImage, goalPositionColumn * cellHeight, goalPositionRow * cellWidth, cellHeight, cellWidth);
             } catch (FileNotFoundException e) {
                 //e.printStackTrace();
             }
