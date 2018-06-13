@@ -1,5 +1,5 @@
 package ViewModel;
-// been watched by View
+
 import Model.IModel;
 import algorithms.mazeGenerators.Maze;
 import javafx.beans.property.IntegerProperty;
@@ -37,12 +37,12 @@ public class MyViewModel extends Observable implements Observer {
         }
     }
 
-    public void generateMaze(int width, int height){
-        model.generateMaze(width, height);
+    public void generateMaze(int row, int col){
+        model.generateMaze(row, col);
     }
 
-    public void moveCharacter(KeyCode movement){
-        model.moveCharacter(movement);
+    public void moveCharacter(KeyCode direction){
+        model.moveCharacter(direction);
     }
 
     public Maze getMaze() {
