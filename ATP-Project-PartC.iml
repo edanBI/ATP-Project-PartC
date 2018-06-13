@@ -10,11 +10,10 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$USER_HOME$/ATP.Project_Part.B/out/artifacts/ATPProjectJAR" />
+          <root url="jar://$MODULE_DIR$/../ATP-Project-PartB/out/artifacts/ATPProjectJAR_jar/ATP-Project-PartB.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$USER_HOME$/ATP.Project_Part.B/out/artifacts/ATPProjectJAR" recursive="false" />
       </library>
     </orderEntry>
   </component>

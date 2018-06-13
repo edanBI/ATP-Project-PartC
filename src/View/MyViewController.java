@@ -2,6 +2,7 @@ package View;
 
 import ViewModel.MyViewModel;
 //import ViewModel.ViewModel;
+import algorithms.mazeGenerators.Maze;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -53,7 +54,7 @@ public class MyViewController implements Observer, IView {
     }
 
     @Override
-    public void displayMaze(int[][] maze) {
+    public void displayMaze(Maze maze) {
         mazeDisplayer.setMaze(maze);
         int characterPositionRow = viewModel.getCharacterPositionRow();
         int characterPositionColumn = viewModel.getCharacterPositionColumn();
