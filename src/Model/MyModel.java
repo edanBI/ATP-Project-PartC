@@ -86,33 +86,21 @@ public class MyModel extends Observable implements IModel {
     public void moveCharacter(KeyCode direction) {
         switch (direction) {
             case DOWN:
-                if (legal_move(getCharacterPositionRow()+1, getCharacterPositionColumn())) {
+                if (legal_move(getCharacterPositionRow()+1, getCharacterPositionColumn()))
                     characterPositionRow++;
-                    break;
-                }
-                else
-                    break;
+                break;
             case LEFT:
-                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()-1)) {
+                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()-1))
                     characterPositionColumn--;
-                    break;
-                }
-                else
-                    break;
+                break;
             case RIGHT:
-                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()+1)) {
+                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()+1))
                     characterPositionColumn++;
-                    break;
-                }
-                else
-                    break;
+                break;
             case UP:
-                if (legal_move(getCharacterPositionRow()-1, getCharacterPositionColumn())) {
+                if (legal_move(getCharacterPositionRow()-1, getCharacterPositionColumn()))
                     characterPositionRow--;
-                    break;
-                }
-                else
-                    break;
+                break;
 
             /*case NUMPAD1:
                 characterPositionRow++;
