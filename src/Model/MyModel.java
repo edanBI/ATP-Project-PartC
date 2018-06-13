@@ -8,19 +8,16 @@ import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.Maze;
 import javafx.scene.input.KeyCode;
 import Client.Client;
-import sun.nio.cs.ext.MacArabic;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Observable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 public class MyModel extends Observable implements IModel {
     //private ExecutorService thread_pool = Executors.newCachedThreadPool();
-    private Maze maze;
+    private Maze m_maze;
     private int characterPositionRow;
     private int characterPositionColumn;
     private Server generateServer;
@@ -34,16 +31,20 @@ public class MyModel extends Observable implements IModel {
 
     public void startServers() {
         generateServer.start();
+        System.out.println("Generate Server is Running");
         solveServer.start();
+        System.out.println("Solve Server is Running");
     }
 
     public void stopServers() {
         generateServer.stop();
+        System.out.println("Generate Server has Stopped");
         solveServer.stop();
+        System.out.println("Solve Server has Stopped");
     }
 
     @Override
-    public void generateMaze(int rows, int cols) {
+    public void generateMaze(int row, int col) {
         try {
             Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
                 @Override
@@ -52,38 +53,68 @@ public class MyModel extends Observable implements IModel {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{rows, cols};
-                        toServer.writeObject(mazeDimensions); //send maze dimensions to server
+                        int[] mazeDimensions = new int[]{row, col};
+                        toServer.writeObject(mazeDimensions); //send m_maze dimensions to server
                         toServer.flush();
-                        byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
+                        byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated m_maze (compressed with MyCompressor) from server
                         InputStream is = new MyDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[1000012 /*assuming biggest maze is 1000x1000*/]; //allocating byte[] for the decompressed maze -
+                        byte[] decompressedMaze = new byte[1000012 /*assuming biggest m_maze is 1000x1000*/]; //allocating byte[] for the decompressed m_maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
-                        Maze maze = new Maze(decompressedMaze);
-                        //maze.print();
-                        characterPositionRow = maze.getStartPosition().getRowIndex();
-                        characterPositionColumn = maze.getStartPosition().getColumnIndex();
+                        m_maze = new Maze(decompressedMaze);
+                        m_maze.print();
+                        characterPositionRow = m_maze.getStartPosition().getRowIndex();
+                        characterPositionColumn = m_maze.getStartPosition().getColumnIndex();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
             client.communicateWithServer();
-            notifyObservers();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        setChanged();
+        notifyObservers();
     }
 
     @Override
     public Maze getMaze() {
-        return maze;
+        return m_maze;
     }
 
     @Override
     public void moveCharacter(KeyCode direction) {
         switch (direction) {
-            case NUMPAD1:
+            case DOWN:
+                if (legal_move(getCharacterPositionRow()+1, getCharacterPositionColumn())) {
+                    characterPositionRow++;
+                    break;
+                }
+                else
+                    break;
+            case LEFT:
+                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()-1)) {
+                    characterPositionColumn--;
+                    break;
+                }
+                else
+                    break;
+            case RIGHT:
+                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()+1)) {
+                    characterPositionColumn++;
+                    break;
+                }
+                else
+                    break;
+            case UP:
+                if (legal_move(getCharacterPositionRow()-1, getCharacterPositionColumn())) {
+                    characterPositionRow--;
+                    break;
+                }
+                else
+                    break;
+
+            /*case NUMPAD1:
                 characterPositionRow++;
                 characterPositionColumn--;
                 break;
@@ -110,7 +141,7 @@ public class MyModel extends Observable implements IModel {
             case NUMPAD9:
                 characterPositionRow--;
                 characterPositionColumn++;
-                break;
+                break;*/
         }
         setChanged();
         notifyObservers();
@@ -124,5 +155,10 @@ public class MyModel extends Observable implements IModel {
     @Override
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
+    }
+
+    private boolean legal_move(int row, int col){
+        return row>=0 && row<m_maze.getM_arr().length && col>=0 && col<m_maze.getM_arr()[0].length
+                && m_maze.getM_arr()[row][col]==0;
     }
 }

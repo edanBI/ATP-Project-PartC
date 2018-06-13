@@ -40,9 +40,9 @@
                     </rowConstraints>
                     <Label text="Maze rows:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                     <Label text="Maze columns:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField fx:id="txtfld_rowsNum" disable="false" text="50" GridPane.columnIndex="1"
+                    <TextField fx:id="txtfld_rowsNum" disable="false" text="10" GridPane.columnIndex="1"
                                GridPane.rowIndex="0"/>
-                    <TextField fx:id="txtfld_columnsNum" disable="false" text="50" GridPane.columnIndex="1"
+                    <TextField fx:id="txtfld_columnsNum" disable="false" text="10" GridPane.columnIndex="1"
                                GridPane.rowIndex="1"/>
                     <Button fx:id="btn_generateMaze" onAction="#generateMaze" prefHeight="25.0" prefWidth="167.0" text="Generate Maze"
                             GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2"/>

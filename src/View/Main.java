@@ -1,6 +1,7 @@
 package View;
 
 import Model.MyModel;
+import ViewModel.MyViewModel;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -13,50 +14,43 @@ import javafx.stage.WindowEvent;
 import java.util.Optional;
 
 public class Main extends Application{
-    /*private Label l_rows, l_cols;
-    private TextField tf_rows, tf_cols;
-    private Button b_generate_maze, b_solve_maze;*/
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        /*MyModel model = new MyModel();
+        primaryStage.setTitle("GOT Maze Application");
+
+        MyModel model = new MyModel();
+        MyViewModel view_model = new MyViewModel(model);
+        MyViewController view_controller = new MyViewController();
+
         model.startServers();
-        //ViewModel viewModel = new ViewModel(model);
-        MyViewController view = new MyViewController();
-        model.addObserver(view);*/
-        //--------------
-        Parent root = FXMLLoader.load(getClass().getResource("MyView.fxml"));
-        primaryStage.setTitle("MyMaze Application");
-        /*Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
-        FXMLLoader fxmlLoader = new FXMLLoader();*/
-        Scene scene = new Scene(root, 800, 700);
-        scene.getStylesheets().add(getClass().getResource("ViewStyle.css").toExternalForm());
+        model.addObserver(view_model); /* view_model watching model */
 
-        /*l_rows = new Label("Number of rows");
-        l_cols = new Label("Number of columns");
-        tf_rows = new TextField();
-        tf_cols = new TextField();
-        b_generate_maze = new Button("Generate Maze");
-        b_solve_maze = new Button("Get Solution");*/
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
 
-        //--------------
-        /*View view = fxmlLoader.getController();
-        view.setResizeEvent(scene);
-        view.setViewModel(viewModel);
-        viewModel.addObserver(view);*/
-        //--------------
-        //SetStageCloseEvent(primaryStage);
+        Scene scene = new Scene(root, 500, 300);
+        scene.getStylesheets().add(getClass().getResource("MyViewStyle.css").toExternalForm());
+
+        view_controller = fxmlLoader.getController();
+        view_controller.setResizeEvent(scene);
+        view_controller.setViewModel(view_model);
+        view_model.addObserver(view_controller);
+
+        SetStageCloseEvent(primaryStage, model);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void SetStageCloseEvent(Stage primaryStage) {
+    private void SetStageCloseEvent(Stage primaryStage, MyModel model) {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent windowEvent) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
+                if (result.get() == ButtonType.OK) {
+                    model.stopServers();
                     // ... user chose OK
+                    // Stop servers
                     // Close program
                 } else {
                     // ... user chose CANCEL or closed the dialog

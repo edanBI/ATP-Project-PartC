@@ -41,8 +41,8 @@ public class MyViewController implements Observer, IView {
     }
 
     private void bindProperties(MyViewModel viewModel) {
-        lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow);
-        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn);
+        lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow); // display row pos
+        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn); // display col pos
     }
 
     @Override
@@ -55,19 +55,19 @@ public class MyViewController implements Observer, IView {
 
     @Override
     public void displayMaze(Maze maze) {
-        mazeDisplayer.setMaze(maze);
-        int characterPositionRow = viewModel.getCharacterPositionRow();
-        int characterPositionColumn = viewModel.getCharacterPositionColumn();
-        mazeDisplayer.setCharacterPosition(characterPositionRow, characterPositionColumn);
-        this.characterPositionRow.set(characterPositionRow + "");
-        this.characterPositionColumn.set(characterPositionColumn + "");
+        mazeDisplayer.setMaze(maze.getM_arr());
+        int positionRow = viewModel.getCharacterPositionRow();
+        int positionColumn = viewModel.getCharacterPositionColumn();
+        mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
+        this.characterPositionRow.set(positionRow + "");
+        this.characterPositionColumn.set(positionColumn + "");
     }
 
     public void generateMaze() {
-        int heigth = Integer.valueOf(txtfld_rowsNum.getText());
+        int height = Integer.valueOf(txtfld_rowsNum.getText());
         int width = Integer.valueOf(txtfld_columnsNum.getText());
         btn_generateMaze.setDisable(true);
-        viewModel.generateMaze(width, heigth);
+        viewModel.generateMaze(width, height);
     }
 
     public void solveMaze(ActionEvent actionEvent) {
@@ -112,13 +112,13 @@ public class MyViewController implements Observer, IView {
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                System.out.println("Width: " + newSceneWidth);
+                //System.out.println("Width: " + newSceneWidth);
             }
         });
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                System.out.println("Height: " + newSceneHeight);
+                //System.out.println("Height: " + newSceneHeight);
             }
         });
     }
@@ -126,7 +126,7 @@ public class MyViewController implements Observer, IView {
     public void About(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            stage.setTitle("AboutController");
+            stage.setTitle("About - MyViewController");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("About.fxml").openStream());
             Scene scene = new Scene(root, 400, 350);

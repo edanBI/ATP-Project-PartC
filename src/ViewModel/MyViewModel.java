@@ -1,7 +1,8 @@
 package ViewModel;
-
+// been watched by View
 import Model.IModel;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -52,7 +53,6 @@ public class MyViewModel extends Observable implements Observer {
     public int getCharacterPositionRow() {
         return characterPositionRowIndex;
     }
-
     public int getCharacterPositionColumn() {
         return characterPositionColumnIndex;
     }
