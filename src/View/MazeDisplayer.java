@@ -1,6 +1,7 @@
 package View;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.EventHandler;
@@ -25,11 +26,23 @@ public class MazeDisplayer extends Canvas {
     private int characterPositionColumn;
     private int goalPositionRow;
     private int goalPositionColumn;
+    private Solution solution;
+    boolean isGenerated = false;
+    boolean wantSolution = false;
 
     public void setMaze(int[][] maze) {
         this.maze = maze;
         redraw();
     }
+
+    public void setSolution (Solution sol) {
+        solution = sol;
+        wantSolution = true;
+        redraw();
+        wantSolution = false;
+    }
+
+
 
     public void setCharacterPosition(int row, int column) {
         characterPositionRow = row;

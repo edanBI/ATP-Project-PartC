@@ -3,6 +3,7 @@ package View;
 import ViewModel.MyViewModel;
 //import ViewModel.ViewModel;
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -34,6 +35,8 @@ public class MyViewController implements Observer, IView {
     public javafx.scene.control.Label lbl_rowsNum;
     public javafx.scene.control.Label lbl_columnsNum;
     public javafx.scene.control.Button btn_generateMaze;
+    public javafx.scene.control.Button solveMaze;
+    private boolean isGenerated = false;
 
     public void setViewModel(MyViewModel viewModel) {
         this.viewModel = viewModel;
@@ -48,13 +51,13 @@ public class MyViewController implements Observer, IView {
     @Override
     public void update(Observable o, Object arg) {
         if (o == viewModel) {
-            displayMaze(viewModel.getMaze());
+            displayMaze(viewModel.getMaze() , viewModel.getSolution());
             btn_generateMaze.setDisable(false);
         }
     }
 
     @Override
-    public void displayMaze(Maze maze) {
+    public void displayMaze(Maze maze, Solution sol) {
         mazeDisplayer.setMaze(maze.getM_arr());
         int positionRow = viewModel.getCharacterPositionRow();
         int positionColumn = viewModel.getCharacterPositionColumn();
@@ -64,17 +67,23 @@ public class MyViewController implements Observer, IView {
         mazeDisplayer.setGoalPosition(goalPositionRow, goalPositionColumn);
         this.characterPositionRow.set(positionRow + "");
         this.characterPositionColumn.set(positionColumn + "");
+        //viewModel.solveMaze();
+        //mazeDisplayer.setSolution(sol);
     }
 
     public void generateMaze() {
         int height = Integer.valueOf(txtfld_rowsNum.getText());
         int width = Integer.valueOf(txtfld_columnsNum.getText());
         btn_generateMaze.setDisable(true);
+        isGenerated = true;
         viewModel.generateMaze(width, height);
     }
 
     public void solveMaze(ActionEvent actionEvent) {
-        showAlert("Solving maze..");
+        //showAlert("Solving maze..");
+        solveMaze.setDisable(true);
+        if (isGenerated)
+            viewModel.solveMaze();
     }
 
     private void showAlert(String alertMessage) {

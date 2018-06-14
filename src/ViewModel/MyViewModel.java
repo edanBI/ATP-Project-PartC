@@ -3,6 +3,7 @@ package ViewModel;
 import Model.IModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.Solution;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -48,6 +49,7 @@ public class MyViewModel extends Observable implements Observer {
     public Maze getMaze() {
         return model.getMaze();
     }
+    public void solveMaze() {model.solveMaze();}
 
     public void generateMaze(int row, int col){
         model.generateMaze(row, col);
@@ -56,6 +58,7 @@ public class MyViewModel extends Observable implements Observer {
     public boolean moveCharacter(KeyCode direction){
         return model.moveCharacter(direction);
     }
+    public Solution getSolution(){return model.getSolution();}
 
     public int getCharacterPositionRow() {
         return characterPositionRowIndex;

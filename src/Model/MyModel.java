@@ -6,6 +6,7 @@ import Server.ServerStrategyGenerateMaze;
 import Server.*;
 import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 import Client.Client;
 
@@ -18,6 +19,7 @@ import java.util.Observable;
 public class MyModel extends Observable implements IModel {
     //private ExecutorService thread_pool = Executors.newCachedThreadPool();
     private Maze m_maze;
+    private Solution mazeSolution;
     private int characterPositionRow;
     private int characterPositionColumn;
     private Server generateServer;
@@ -82,8 +84,49 @@ public class MyModel extends Observable implements IModel {
     }
 
     @Override
+    public void solveMaze() {
+        try {
+            Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
+                @Override
+                public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
+                    try {
+                        ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
+                        ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
+                        toServer.flush();
+                        //MyMazeGenerator mg = new MyMazeGenerator();
+                        //Maze maze = mg.generate(50, 50);
+                        //maze.print();
+                        toServer.writeObject(m_maze); //send maze to server
+                        toServer.flush();
+                        mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
+
+                        //print Maze Solution retrieved from the server
+                        //System.out.println(String.format("Solution steps: %s", mazeSolution));
+                        //ArrayList<AState> mazeSolutionSteps = mazeSolution.getSolutionPath();
+                        //for (int i = 0; i < mazeSolutionSteps.size(); i++) {
+                        //  System.out.println(String.format("%s. %s", i, mazeSolutionSteps.get(i).toString()));
+                        //}
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            client.communicateWithServer();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
     public Maze getMaze() {
         return m_maze;
+    }
+
+    @Override
+    public Solution getSolution() {
+        return mazeSolution;
     }
 
     @Override
