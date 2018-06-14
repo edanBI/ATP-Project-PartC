@@ -87,7 +87,7 @@ public class MyModel extends Observable implements IModel {
     }
 
     @Override
-    public void moveCharacter(KeyCode direction) {
+    public boolean moveCharacter(KeyCode direction) {
         switch (direction) {
             case DOWN:
                 if (legal_move(getCharacterPositionRow()+1, getCharacterPositionColumn())) {
@@ -149,6 +149,9 @@ public class MyModel extends Observable implements IModel {
         }
         setChanged();
         notifyObservers();
+
+        return getCharacterPositionRow()==getGoalPositionRow()
+                && getCharacterPositionColumn()==getGoalPositionColumn();
     }
 
     @Override

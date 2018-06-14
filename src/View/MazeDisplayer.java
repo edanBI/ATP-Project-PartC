@@ -20,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class MazeDisplayer extends Canvas {
 
-    //private Maze maze;
     private int[][] maze;
     private int characterPositionRow;
     private int characterPositionColumn;
@@ -61,6 +60,7 @@ public class MazeDisplayer extends Canvas {
             try {
                 Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
                 Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
+                Image goalImage = new Image(new FileInputStream(ImageFileGoal.get()));
 
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.clearRect(0, 0, getWidth(), getHeight());
@@ -79,7 +79,7 @@ public class MazeDisplayer extends Canvas {
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
                 gc.drawImage(characterImage, characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
-                gc.drawImage(characterImage, goalPositionColumn * cellHeight, goalPositionRow * cellWidth, cellHeight, cellWidth);
+                gc.drawImage(goalImage, goalPositionColumn * cellHeight, goalPositionRow * cellWidth, cellHeight, cellWidth);
             } catch (FileNotFoundException e) {
                 //e.printStackTrace();
             }
@@ -89,6 +89,7 @@ public class MazeDisplayer extends Canvas {
     //region Properties
     private StringProperty ImageFileNameWall = new SimpleStringProperty();
     private StringProperty ImageFileNameCharacter = new SimpleStringProperty();
+    private StringProperty ImageFileGoal = new SimpleStringProperty();
 
     public String getImageFileNameWall() {
         return ImageFileNameWall.get();
@@ -96,6 +97,14 @@ public class MazeDisplayer extends Canvas {
 
     public void setImageFileNameWall(String imageFileNameWall) {
         this.ImageFileNameWall.set(imageFileNameWall);
+    }
+
+    public void setImageFileGoal(String imageFileGoal) {
+        this.ImageFileGoal.set(imageFileGoal);
+    }
+
+    public String getImageFileGoal() {
+        return ImageFileGoal.get();
     }
 
     public String getImageFileNameCharacter() {

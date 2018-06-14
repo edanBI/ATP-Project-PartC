@@ -45,21 +45,22 @@ public class MyViewModel extends Observable implements Observer {
         }
     }
 
+    public Maze getMaze() {
+        return model.getMaze();
+    }
+
     public void generateMaze(int row, int col){
         model.generateMaze(row, col);
     }
 
-    public void moveCharacter(KeyCode direction){
-        model.moveCharacter(direction);
-    }
-
-    public Maze getMaze() {
-        return model.getMaze();
+    public boolean moveCharacter(KeyCode direction){
+        return model.moveCharacter(direction);
     }
 
     public int getCharacterPositionRow() {
         return characterPositionRowIndex;
     }
+
     public int getCharacterPositionColumn() {
         return characterPositionColumnIndex;
     }

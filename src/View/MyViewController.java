@@ -83,9 +83,23 @@ public class MyViewController implements Observer, IView {
         alert.show();
     }
 
+    private void showFinishedGameAlert(String alertMessage) {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setContentText(alertMessage);
+        alert.show();
+    }
+
     public void KeyPressed(KeyEvent keyEvent) {
-        viewModel.moveCharacter(keyEvent.getCode());
+        if (viewModel.moveCharacter(keyEvent.getCode())){
+            EndGameDialog.show();
+        }
+
         keyEvent.consume();
+    }
+
+    public void goal_reached(){
+
     }
 
     //region String Property for Binding
