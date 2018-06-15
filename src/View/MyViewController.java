@@ -60,7 +60,7 @@ public class MyViewController implements Observer, IView {
                 btn_solveMaze.setDisable(false);
             }
             if (arg.equals("moved")) {
-
+                displayMaze(view_model.getMaze());
             }
         }
     }
@@ -68,17 +68,17 @@ public class MyViewController implements Observer, IView {
     @Override
     public void displayMaze(Maze maze) {
         mazeDisplayer.setMaze(maze);
-        int positionRow = view_model.getCharacterPositionRow();
-        int positionColumn = view_model.getCharacterPositionColumn();
-        int goalPositionRow = view_model.getGoalPositionRowIndex();
-        int goalPositionColumn = view_model.getGoalPositionColumnIndex();
-        mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
-        mazeDisplayer.setGoalPosition(goalPositionRow, goalPositionColumn);
-        this.characterPositionRow.set(positionRow + "");
-        this.characterPositionColumn.set(positionColumn + "");
+        int character_pos_row = view_model.getCharacterPositionRow();
+        int character_pos_col = view_model.getCharacterPositionColumn();
+        //int goalPositionRow = view_model.getGoalPositionRowIndex();
+        //int goalPositionColumn = view_model.getGoalPositionColumnIndex();
+        mazeDisplayer.setCharacterPosition(character_pos_row, character_pos_col); // display character on screen
+        //mazeDisplayer.setGoalPosition(goalPositionRow, goalPositionColumn);
+        this.characterPositionRow.set(character_pos_row + "");
+        this.characterPositionColumn.set(character_pos_col + "");
         //my_viewModel.btn_solveMaze();
         //mazeDisplayer.setSolution(sol);
-        mazeDisplayer.requestFocus();
+        //mazeDisplayer.requestFocus();
     }
 
     public void generateMaze() {

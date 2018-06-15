@@ -55,6 +55,10 @@ public class MyViewModel extends Observable implements Observer {
                 notifyObservers("solution");
             }
             if (arg.equals("character moved")) {
+                characterPositionRowIndex = model.getCharacterPositionRow();
+                characterPositionRow.set(characterPositionRowIndex + "");
+                characterPositionColumnIndex = model.getCharacterPositionColumn();
+                characterPositionColumn.set(characterPositionColumnIndex + "");
                 setChanged();
                 notifyObservers("moved");
             }

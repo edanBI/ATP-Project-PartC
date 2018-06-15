@@ -135,62 +135,74 @@ public class MyModel extends Observable implements IModel {
     public boolean moveCharacter(KeyCode direction) {
         switch (direction) {
             case DOWN:
-                if (legal_move(getCharacterPositionRow()+1, getCharacterPositionColumn())) {
+                if (legal_move(characterPositionRow+1, characterPositionColumn))
                     characterPositionRow++;
-                    break;
-                }
-                else
-                    break;
+                break;
             case LEFT:
-                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()-1)) {
+                if (legal_move(characterPositionRow, characterPositionColumn-1))
                     characterPositionColumn--;
-                    break;
-                }
-                else
-                    break;
+                break;
             case RIGHT:
-                if (legal_move(getCharacterPositionRow(), getCharacterPositionColumn()+1)) {
+                if (legal_move(characterPositionRow, characterPositionColumn+1))
                     characterPositionColumn++;
-                    break;
-                }
-                else
-                    break;
+                break;
             case UP:
-                if (legal_move(getCharacterPositionRow()-1, getCharacterPositionColumn())) {
+                if (legal_move(characterPositionRow-1, characterPositionColumn))
                     characterPositionRow--;
-                    break;
-                }
-                else
-                    break;
-
-            /*case NUMPAD1:
+                break;
+            //////////////////////////////////////////////////////////////////////////////
+            case NUMPAD1:
+                if ( (legal_move(characterPositionRow+1, characterPositionColumn) ||
+                        legal_move(characterPositionRow, characterPositionColumn-1))
+                        && legal_move(characterPositionRow+1, characterPositionColumn-1)){
                 characterPositionRow++;
                 characterPositionColumn--;
+                }
                 break;
             case NUMPAD2:
-                characterPositionRow++;
+                if (legal_move(characterPositionRow+1, characterPositionColumn)){
+                    characterPositionRow++;
+                }
                 break;
             case NUMPAD3:
-                characterPositionRow++;
-                characterPositionColumn++;
+                if ( (legal_move(characterPositionRow+1, characterPositionColumn) ||
+                        legal_move(characterPositionRow, characterPositionColumn+1))
+                        && legal_move(characterPositionRow+1, characterPositionColumn+1)){
+                    characterPositionRow++;
+                    characterPositionColumn++;
+                }
                 break;
             case NUMPAD4:
-                characterPositionColumn--;
+                if (legal_move(characterPositionRow, characterPositionColumn-1)){
+                    characterPositionColumn--;
+                }
                 break;
             case NUMPAD6:
-                characterPositionColumn++;
+                if (legal_move(characterPositionRow, characterPositionColumn+1)){
+                    characterPositionColumn++;
+                }
                 break;
             case NUMPAD7:
-                characterPositionRow--;
-                characterPositionColumn--;
+                if ( (legal_move(characterPositionRow, characterPositionColumn-1) ||
+                        legal_move(characterPositionRow-1, characterPositionColumn))
+                        && legal_move(characterPositionRow-1, characterPositionColumn-1)){
+                    characterPositionRow--;
+                    characterPositionColumn--;
+                }
                 break;
             case NUMPAD8:
-                characterPositionRow--;
+                if (legal_move(characterPositionRow-1, characterPositionColumn)){
+                    characterPositionRow--;
+                }
                 break;
             case NUMPAD9:
-                characterPositionRow--;
-                characterPositionColumn++;
-                break;*/
+                if ( (legal_move(characterPositionRow, characterPositionColumn+1)
+                        || legal_move(characterPositionRow-1, characterPositionColumn))
+                        && legal_move(characterPositionRow-1, characterPositionColumn+1)){
+                    characterPositionRow--;
+                    characterPositionColumn++;
+                }
+                break;
         }
         setChanged();
         notifyObservers("character moved");
@@ -212,7 +224,6 @@ public class MyModel extends Observable implements IModel {
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
     }
-
 
     public int getGoalPositionColumn() {
         return goalPositionColumn;

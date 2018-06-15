@@ -1,6 +1,7 @@
 package View;
 
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -26,6 +27,7 @@ public class MazeDisplayer extends Canvas {
     private int characterPositionColumn;
     private int goalPositionRow;
     private int goalPositionColumn;
+    private Position goal_pos;
     private Solution solution;
     boolean isGenerated = false;
     boolean wantSolution = false;
@@ -38,10 +40,7 @@ public class MazeDisplayer extends Canvas {
 
     public void setMaze(Maze maze) {
         this.maze = maze.getM_arr();
-        characterPositionRow = maze.getStartPosition().getRowIndex();
-        characterPositionColumn = maze.getStartPosition().getColumnIndex();
-        goalPositionRow = maze.getGoalPosition().getRowIndex();
-        goalPositionColumn = maze.getGoalPosition().getColumnIndex();
+        goal_pos = maze.getGoalPosition();
         redraw();
     }
 
@@ -56,32 +55,17 @@ public class MazeDisplayer extends Canvas {
         wantSolution = false;
     }
 
-    /*@Override
-    public boolean isResizable() {
-        return true;
-    }*/
-
-    /*@Override
-    public double prefWidth(double height) {
-        return getHeight();
-    }
-
-    @Override
-    public double prefHeight(double width) {
-        return getWidth();
-    }*/
-
     public void setCharacterPosition(int row, int column) {
         characterPositionRow = row;
         characterPositionColumn = column;
         redraw();
     }
 
-    public void setGoalPosition (int row, int column) {
+/*    public void setGoalPosition (int row, int column) {
         goalPositionRow = row;
         goalPositionColumn = column;
         redraw();
-    }
+    }*/
 
     public void redraw() {
         if (maze != null) {
@@ -101,23 +85,28 @@ public class MazeDisplayer extends Canvas {
 
 
                 //Draw Maze
-                for (int i = 0; i < maze.length; i++) {
-                    for (int j = 0; j < maze[i].length; j++) {
+                for (int i = 0; i < maze.length; i++) { // i == row - y axis
+                    for (int j = 0; j < maze[i].length; j++) { // j == col - x axis
                         if (maze[i][j] == 1) {
-                            //gc.fillRect(j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            //gc.drawImage(wallImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            gc.drawImage(wallImage, i * cellWidth, j* cellHeight, cellWidth, cellHeight);
+                            gc.drawImage(wallImage, j * cellWidth, i* cellHeight, cellWidth, cellHeight);
                         }
-                        else
-                            gc.fillRect(i * cellWidth, j* cellHeight, cellWidth, cellHeight);
+                        else {
+                            gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                        }
+                        if (j==goal_pos.getColumnIndex() && i==goal_pos.getRowIndex()) {
+                            gc.drawImage(goalImage, goal_pos.getColumnIndex() * cellWidth, goal_pos.getRowIndex() * cellHeight, cellWidth, cellHeight);
+                        }
+                        if (i == characterPositionRow && j == characterPositionColumn) {
+                            gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
+                        }
                     }
                 }
 
                 //Draw Character
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
-                gc.drawImage(characterImage, characterPositionRow * cellWidth, characterPositionColumn * cellHeight, cellWidth, cellHeight);
-                gc.drawImage(goalImage, goalPositionRow * cellWidth, goalPositionColumn * cellHeight, cellWidth, cellHeight);
+                //gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
+                //gc.drawImage(goalImage, goalPositionColumn * cellWidth, goalPositionRow * cellHeight, cellWidth, cellHeight);
             } catch (FileNotFoundException e) {
                 //e.printStackTrace();
             }
