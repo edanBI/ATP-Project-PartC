@@ -24,6 +24,7 @@ public class MyViewModel extends Observable implements Observer {
     private int characterPositionColumnIndex;
     private int goalPositionRowIndex;
     private int goalPositionColumnIndex;
+    private Solution sol;
     public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
     public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
     public StringProperty goalPositionRow = new SimpleStringProperty("1");
@@ -35,17 +36,28 @@ public class MyViewModel extends Observable implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (o == model){
-            characterPositionRowIndex = model.getCharacterPositionRow();
-            characterPositionRow.set(characterPositionRowIndex + "");
-            characterPositionColumnIndex = model.getCharacterPositionColumn();
-            characterPositionColumn.set(characterPositionColumnIndex + "");
-            goalPositionRowIndex = model.getGoalPositionRow();
-            goalPositionRow.set(goalPositionRowIndex + "");
-            goalPositionColumnIndex = model.getGoalPositionColumn();
-            goalPositionColumn.set(goalPositionColumnIndex + "");
-            setChanged();
-            notifyObservers();
+        if (o == model) {
+            if (arg.equals("maze generated")){
+                characterPositionRowIndex = model.getCharacterPositionRow();
+                characterPositionRow.set(characterPositionRowIndex + "");
+                characterPositionColumnIndex = model.getCharacterPositionColumn();
+                characterPositionColumn.set(characterPositionColumnIndex + "");
+                goalPositionRowIndex = model.getGoalPositionRow();
+                goalPositionRow.set(goalPositionRowIndex + "");
+                goalPositionColumnIndex = model.getGoalPositionColumn();
+                goalPositionColumn.set(goalPositionColumnIndex + "");
+                setChanged();
+                notifyObservers("maze generated");
+            }
+            if (arg.equals("maze solved")){
+                sol = model.getSolution();
+                setChanged();
+                notifyObservers("solution");
+            }
+            if (arg.equals("character moved")) {
+                setChanged();
+                notifyObservers("moved");
+            }
         }
     }
 
@@ -65,7 +77,9 @@ public class MyViewModel extends Observable implements Observer {
         return model.moveCharacter(direction);
     }
 
-    public Solution getSolution(){return model.getSolution();}
+    public Solution getSolution() {
+        return model.getSolution();
+    }
 
     public int getCharacterPositionRow() {
         return characterPositionRowIndex;

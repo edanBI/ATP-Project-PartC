@@ -82,7 +82,7 @@ public class MyModel extends Observable implements IModel {
         goalPositionRow = m_maze.getGoalPosition().getRowIndex();
         goalPositionColumn = m_maze.getGoalPosition().getColumnIndex();
         setChanged();
-        notifyObservers();
+        notifyObservers("maze generated");
     }
 
     @Override
@@ -118,7 +118,7 @@ public class MyModel extends Observable implements IModel {
             e.printStackTrace();
         }
         setChanged();
-        notifyObservers();
+        notifyObservers("maze solved");
     }
 
     @Override
@@ -193,12 +193,16 @@ public class MyModel extends Observable implements IModel {
                 break;*/
         }
         setChanged();
-        notifyObservers();
+        notifyObservers("character moved");
 
         return getCharacterPositionRow()==getGoalPositionRow()
                 && getCharacterPositionColumn()==getGoalPositionColumn();
     }
 
+    private boolean legal_move(int row, int col){
+        return row>=0 && row<m_maze.getM_arr().length && col>=0 && col<m_maze.getM_arr()[0].length
+                && m_maze.getM_arr()[row][col]==0;
+    }
     @Override
     public int getCharacterPositionRow() {
         return characterPositionRow;
@@ -209,10 +213,6 @@ public class MyModel extends Observable implements IModel {
         return characterPositionColumn;
     }
 
-    private boolean legal_move(int row, int col){
-        return row>=0 && row<m_maze.getM_arr().length && col>=0 && col<m_maze.getM_arr()[0].length
-                && m_maze.getM_arr()[row][col]==0;
-    }
 
     public int getGoalPositionColumn() {
         return goalPositionColumn;

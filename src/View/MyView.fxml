@@ -9,8 +9,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.SepiaTone?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -91,11 +89,4 @@
             </padding>
         </Pane>
     </center>
-   <bottom>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" smooth="false" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="file:/D:/user//resources/Images/jerusalem_skyline.jpg" />
-         </image>
-      </ImageView>
-   </bottom>
 </BorderPane>
