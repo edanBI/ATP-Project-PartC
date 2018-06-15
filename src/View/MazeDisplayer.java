@@ -1,6 +1,5 @@
 package View;
 
-import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -30,9 +29,19 @@ public class MazeDisplayer extends Canvas {
     boolean isGenerated = false;
     boolean wantSolution = false;
 
+
+    public MazeDisplayer() {
+        widthProperty().addListener(e->redraw());
+        heightProperty().addListener(e->redraw());
+    }
+
     public void setMaze(int[][] maze) {
         this.maze = maze;
         redraw();
+    }
+
+    public int[][] getMaze(){
+        return maze;
     }
 
     public void setSolution (Solution sol) {
@@ -42,7 +51,20 @@ public class MazeDisplayer extends Canvas {
         wantSolution = false;
     }
 
+    @Override
+    public boolean isResizable() {
+        return true;
+    }
 
+    @Override
+    public double prefWidth(double height) {
+        return getHeight();
+    }
+
+    @Override
+    public double prefHeight(double width) {
+        return getWidth();
+    }
 
     public void setCharacterPosition(int row, int column) {
         characterPositionRow = row;
@@ -82,8 +104,8 @@ public class MazeDisplayer extends Canvas {
                 for (int i = 0; i < maze.length; i++) {
                     for (int j = 0; j < maze[i].length; j++) {
                         if (maze[i][j] == 1) {
-                            gc.fillRect(j * cellHeight, i * cellWidth, cellHeight, cellWidth);
-                            //gc.drawImage(wallImage, i * cellHeight, j * cellWidth, cellHeight, cellWidth);
+                            //gc.fillRect(j * cellHeight, i * cellWidth, cellHeight, cellWidth);
+                            gc.drawImage(wallImage, j * cellHeight, i * cellWidth, cellHeight, cellWidth);
                         }
                     }
                 }

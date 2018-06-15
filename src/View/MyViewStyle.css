@@ -1,13 +1,21 @@
 .root{
-    -fx-background-color: bisque;
+    -fx-background-image: url(http://www.elgransrj.com/media/wysiwyg/toy-story-background-slide-4-savedforweb.png) 25%;
+    -fx-background-size: cover;
 }
 
-Button
+.MazeDisplayer{
+    -fx-border-color: black;
+}
+
+.button
 {
     -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-border-color: yellow;
     -fx-font-family: "Arial Narrow";
+    -fx-font-size: 12;
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 

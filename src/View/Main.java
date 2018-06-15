@@ -17,29 +17,30 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("GOT Maze Application");
+        primaryStage.setTitle("Miri-Run Maze Application");
 
-        MyModel model = new MyModel();
-        MyViewModel view_model = new MyViewModel(model);
-        MyViewController view_controller = new MyViewController();
+        //create MVVM model, view model, view parts
+        MyModel my_model = new MyModel();
+        MyViewModel view_model = new MyViewModel(my_model);
+        MyViewController view_controller;
+        my_model.addObserver(view_model); /* view_model watching model */
+        my_model.startServers();
 
-        model.startServers();
-        model.addObserver(view_model); /* view_model watching model */
+        FXMLLoader fx_loader = new FXMLLoader();
+        Parent root = fx_loader.load(getClass().getResource("MyView.fxml").openStream());
+        Scene main_scene = new Scene(root, 600, 600);
+        primaryStage.setMinHeight(600);
+        primaryStage.setMinWidth(600);
+        main_scene.getStylesheets().add(getClass().getResource("MyViewStyle.css").toExternalForm());
+        primaryStage.show();
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Parent root = fxmlLoader.load(getClass().getResource("MyView.fxml").openStream());
-
-        Scene scene = new Scene(root, 500, 300);
-        scene.getStylesheets().add(getClass().getResource("MyViewStyle.css").toExternalForm());
-
-        view_controller = fxmlLoader.getController();
-        view_controller.setResizeEvent(scene);
+        view_controller = fx_loader.getController();
         view_controller.setViewModel(view_model);
+        view_controller.setResizeEvent(main_scene);
         view_model.addObserver(view_controller);
 
-        SetStageCloseEvent(primaryStage, model);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        SetStageCloseEvent(primaryStage, my_model);
+        primaryStage.setScene(main_scene);
     }
 
     private void SetStageCloseEvent(Stage primaryStage, MyModel model) {

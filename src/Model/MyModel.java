@@ -1,5 +1,7 @@
 package Model;
-
+ /*
+ Observable by View Model
+ */
 import Client.IClientStrategy;
 import IO.MyDecompressorInputStream;
 import Server.ServerStrategyGenerateMaze;

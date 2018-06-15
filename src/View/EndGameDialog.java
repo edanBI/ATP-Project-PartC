@@ -14,8 +14,8 @@ public class EndGameDialog {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(" ");
-        window.setMinWidth(250);
-        window.setMinHeight(150);
+        window.setMinWidth(200);
+        window.setMinHeight(100);
         window.setResizable(false);
 
         GridPane layout = new GridPane();

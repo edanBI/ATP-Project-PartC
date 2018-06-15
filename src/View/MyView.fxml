@@ -8,10 +8,12 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
@@ -44,17 +46,6 @@
                     <Label prefHeight="45.0" prefWidth="128.0" text="Char column:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
                     <Label fx:id="lbl_rowsNum" text="${controller.characterPositionRow}" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Label fx:id="lbl_columnsNum" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="4" text="${controller.characterPositionRow}" />-->
-                    <!--<Label GridPane.columnIndex="1" GridPane.rowIndex="5" text="${controller.characterPositionColumn}"/>-->
-                    <!--                    <ChoiceBox value="2 minutes" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                            <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                    <String fx:value="2 minutes" />
-                                                    <String fx:value="5 minutes" />
-                                                    <String fx:value="15 minutes" />
-                                                </FXCollections>
-                                            </items>
-                                        </ChoiceBox>-->
                 </GridPane>
             </children>
             <padding>
@@ -62,13 +53,6 @@
             </padding>
         </VBox>
     </left>
-    <bottom>
-        <HBox BorderPane.alignment="CENTER">
-            <children>
-                <Label text="Status bar" />
-            </children>
-        </HBox>
-    </bottom>
     <top>
         <VBox BorderPane.alignment="CENTER">
             <children>
@@ -97,14 +81,21 @@
     <center>
         <Pane BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="600.0"
-                               imageFileNameCharacter="resources/Images/miri.png"
-                               imageFileGoal="resources/Images/small_messi_goal.png"
-                               imageFileNameWall="resources/Images/wall3.jpg" width="600.0" />
+                <MazeDisplayer fx:id="mazeDisplayer" height="600.0" imageFileGoal="resources/Images/small_messi_goal.png" imageFileNameCharacter="resources/Images/miri.png" imageFileNameWall="resources/Images/wail_wall.jpg" style="-fx-border: black;" width="600.0">
+               <effect>
+                  <SepiaTone />
+               </effect></MazeDisplayer>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </Pane>
     </center>
+   <bottom>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" smooth="false" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="file:/D:/user//resources/Images/jerusalem_skyline.jpg" />
+         </image>
+      </ImageView>
+   </bottom>
 </BorderPane>
