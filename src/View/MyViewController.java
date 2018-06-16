@@ -2,8 +2,10 @@ package View;
 /*
 Observe View Model
 */
+import IO.MyDecompressorInputStream;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
+import com.sun.deploy.util.SystemUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -16,10 +18,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.*;
 import java.security.spec.ECField;
+import java.time.Clock;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Optional;
@@ -184,6 +191,46 @@ public class MyViewController implements Observer, IView {
     public void properties() {
 
     }
+    public void saveMaze() {
+        if (view_model.getMaze() == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("You need to generate maze first..");
+            alert.showAndWait();
+            return;
+        }
+        String num_rows = Integer.valueOf(txtfld_rowsNum.getText()).toString();
+        String num_cols = Integer.valueOf(txtfld_columnsNum.getText()).toString();
+
+        FileChooser dialog = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("maze file (*.maze)", "*.maze");
+        dialog.setTitle("Save Maze");
+        dialog.setInitialFileName("Maze ["+num_rows+","+num_cols+"]: " + LocalDateTime.now(Clock.systemDefaultZone())+".maze");
+        dialog.getExtensionFilters().add(filter);
+        File file = dialog.showSaveDialog(new Stage());
+        if (file != null) {
+            try {
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(num_rows);
+                bw.newLine();
+                bw.write(num_cols);
+                bw.newLine();
+                bw.write(view_model.getMaze().getStartPosition().toString());
+                bw.newLine();
+                bw.write(view_model.getMaze().getGoalPosition().toString());
+                bw.newLine();
+                for (int i=0; i<view_model.getMaze().getM_arr().length; i++){
+                    for (int j=0; j<view_model.getMaze().getM_arr()[i].length; j++) {
+                        bw.write(Integer.toString(view_model.getMaze().getM_arr()[i][j]));
+                    }
+                    bw.newLine();
+                }
+
+                bw.close();
+            }
+            catch (IOException e) { e.printStackTrace(); }
+        }
+    }
 
     public void About() {
         try {
@@ -197,17 +244,25 @@ public class MyViewController implements Observer, IView {
         } catch (Exception e) {e.getStackTrace(); }
     }
 
+    public void Help() {
+        try {
+            Stage window = new Stage();
+            window.setTitle("Help");
+            Parent layout = new FXMLLoader().load(getClass().getResource("Help.fxml").openStream());
+            Scene scene = new Scene(layout, 600, 232);
+            window.setScene(scene);
+            //window.initModality(Modality.APPLICATION_MODAL);
+            //window.showAndWait();
+            window.show();
+        } catch (Exception e) {e.getStackTrace(); }
+    }
+
     public void exit() {
-        /*view_model.stopServer();
-        System.exit(0);*/
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             view_model.stopServer();
             System.exit(0);
-            // ... user chose OK
-            // Stop servers
-            // Close program
         }
     }
 }

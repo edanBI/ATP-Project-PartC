@@ -25,7 +25,7 @@ public class Main extends Application{
         my_model.addObserver(view_model); /* view_model watching model */
 
 
-        primaryStage.setTitle("Miri-Run Maze Application");
+        primaryStage.setTitle("Miri Fun Run");
         FXMLLoader fx_loader = new FXMLLoader();
         Parent root = fx_loader.load(getClass().getResource("MyView.fxml").openStream());
         Scene main_scene = new Scene(root, 700, 500);
