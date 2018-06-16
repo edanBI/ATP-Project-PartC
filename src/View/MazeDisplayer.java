@@ -2,6 +2,8 @@ package View;
 
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -18,6 +20,7 @@ import javafx.scene.paint.Color;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MazeDisplayer extends Canvas {
@@ -40,6 +43,9 @@ public class MazeDisplayer extends Canvas {
 
     public void setMaze(Maze maze) {
         this.maze = maze.getM_arr();
+        isGenerated = true;
+        wantSolution = false;
+        solution = null;
         goal_pos = maze.getGoalPosition();
         redraw();
     }
@@ -49,15 +55,19 @@ public class MazeDisplayer extends Canvas {
     }
 
     public void setSolution (Solution sol) {
-        solution = sol;
-        wantSolution = true;
-        redraw();
-        wantSolution = false;
+        if (maze != null) {
+            solution = sol;
+            wantSolution = true;
+            redraw();
+            wantSolution = false;
+        }
     }
 
     public void setCharacterPosition(int row, int column) {
         characterPositionRow = row;
         characterPositionColumn = column;
+        if (solution != null)
+            wantSolution = true;
         redraw();
     }
 
@@ -89,9 +99,23 @@ public class MazeDisplayer extends Canvas {
                     for (int j = 0; j < maze[i].length; j++) { // j == col - x axis
                         if (maze[i][j] == 1) {
                             gc.drawImage(wallImage, j * cellWidth, i* cellHeight, cellWidth, cellHeight);
+                            //gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
                         }
                         else {
                             gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                        }
+                        if (wantSolution && isGenerated) {
+                            //wantSolution = false;
+                            gc.setFill(Color.RED);
+                            List<AState> drawSol = solution.getSolutionPath();
+                            for (int k = 0; k < drawSol.size(); k++) {
+                                MazeState state =(MazeState) drawSol.get(k);
+                                if ((state.getPosition().getColumnIndex() == j && state.getPosition().getRowIndex() == i)) {
+                                    gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                                    break;
+                                }
+                            }
+                            gc.setFill(Color.BLACK);
                         }
                         if (j==goal_pos.getColumnIndex() && i==goal_pos.getRowIndex()) {
                             gc.drawImage(goalImage, goal_pos.getColumnIndex() * cellWidth, goal_pos.getRowIndex() * cellHeight, cellWidth, cellHeight);
@@ -101,7 +125,7 @@ public class MazeDisplayer extends Canvas {
                         }
                     }
                 }
-
+                wantSolution = false;
                 //Draw Character
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);

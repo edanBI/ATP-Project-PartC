@@ -8,6 +8,7 @@ import Server.ServerStrategyGenerateMaze;
 import Server.*;
 import Server.ServerStrategySolveSearchProblem;
 import algorithms.mazeGenerators.Maze;
+import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 import Client.Client;
@@ -88,6 +89,8 @@ public class MyModel extends Observable implements IModel {
     @Override
     public void solveMaze() {
         try {
+            if (m_maze == null)
+                return;
             Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
                 @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
@@ -98,6 +101,7 @@ public class MyModel extends Observable implements IModel {
                         //MyMazeGenerator mg = new MyMazeGenerator();
                         //Maze maze = mg.generate(50, 50);
                         //maze.print();
+                        m_maze.setsPos(new Position(characterPositionRow,characterPositionColumn));
                         toServer.writeObject(m_maze); //send maze to server
                         toServer.flush();
                         mazeSolution = (Solution) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
@@ -155,8 +159,8 @@ public class MyModel extends Observable implements IModel {
                 if ( (legal_move(characterPositionRow+1, characterPositionColumn) ||
                         legal_move(characterPositionRow, characterPositionColumn-1))
                         && legal_move(characterPositionRow+1, characterPositionColumn-1)){
-                characterPositionRow++;
-                characterPositionColumn--;
+                    characterPositionRow++;
+                    characterPositionColumn--;
                 }
                 break;
             case NUMPAD2:
@@ -205,7 +209,7 @@ public class MyModel extends Observable implements IModel {
                 break;
         }
         setChanged();
-        notifyObservers("character moved");
+        notifyObservers("moved");
 
         return getCharacterPositionRow()==getGoalPositionRow()
                 && getCharacterPositionColumn()==getGoalPositionColumn();

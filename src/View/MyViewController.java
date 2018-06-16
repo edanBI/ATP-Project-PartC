@@ -14,12 +14,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.security.spec.ECField;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Optional;
 
 public class MyViewController implements Observer, IView {
 
@@ -28,12 +31,13 @@ public class MyViewController implements Observer, IView {
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.TextField txtfld_rowsNum;
     public javafx.scene.control.TextField txtfld_columnsNum;
-    public javafx.scene.control.Label lbl_rowsNum;
-    public javafx.scene.control.Label lbl_columnsNum;
+    /*public javafx.scene.control.Label lbl_rowsNum;
+    public javafx.scene.control.Label lbl_columnsNum;*/
+    public javafx.scene.control.Label lbl_character_pos;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
 
-    private boolean isGenerated = false;
+    //private boolean isGenerated = false;
 
     public void setViewModel(MyViewModel my_viewModel) {
         this.view_model = my_viewModel;
@@ -42,11 +46,12 @@ public class MyViewController implements Observer, IView {
     }
 
     /*
-    * binds the text label in the main menu to the my_viewModel in the background
-    * */
+     * binds the text label in the main menu to the my_viewModel in the background
+     * */
     private void bindProperties(MyViewModel viewModel) {
-        lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow); // display row pos
-        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn); // display col pos
+        /*lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow); // display row pos
+        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn); // display col pos*/
+        lbl_character_pos.textProperty().bind(viewModel.character_Position);
     }
 
     public void update(Observable o, Object arg) {
@@ -59,8 +64,12 @@ public class MyViewController implements Observer, IView {
                 mazeDisplayer.setSolution(view_model.getSolution());
                 btn_solveMaze.setDisable(false);
             }
-            if (arg.equals("moved")) {
-                displayMaze(view_model.getMaze());
+            if (arg.equals("player moved")) {
+                int positionRow = view_model.getCharacterPositionRow();
+                int positionColumn = view_model.getCharacterPositionColumn();
+                mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
+                this.characterPositionRow.set(positionRow + "");
+                this.characterPositionColumn.set(positionColumn + "");
             }
         }
     }
@@ -85,7 +94,6 @@ public class MyViewController implements Observer, IView {
         int height = Integer.valueOf(txtfld_rowsNum.getText());
         int width = Integer.valueOf(txtfld_columnsNum.getText());
         btn_generateMaze.setDisable(true);
-        isGenerated = true;
 
         mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
         mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);
@@ -98,9 +106,10 @@ public class MyViewController implements Observer, IView {
 
     public void solveMaze(ActionEvent actionEvent) {
         //showAlert("Solving maze..");
-        btn_solveMaze.setDisable(true);
-        if (isGenerated)
+        if (view_model.getMaze() != null) {
+            btn_solveMaze.setDisable(true);
             view_model.solveMaze();
+        }
     }
 
     private void showAlert(String alertMessage) {
@@ -172,18 +181,33 @@ public class MyViewController implements Observer, IView {
         });
     }
 
-    public void About(ActionEvent actionEvent) {
-        try {
-            Stage stage = new Stage();
-            stage.setTitle("About - MyViewController");
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("About.fxml").openStream());
-            Scene scene = new Scene(root, 400, 350);
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-            stage.show();
-        } catch (Exception e) {
+    public void properties() {
 
+    }
+
+    public void About() {
+        try {
+            Stage window = new Stage();
+            window.setTitle("Welcome");
+            Parent layout = new FXMLLoader().load(getClass().getResource("About.fxml").openStream());
+            Scene scene = new Scene(layout, 600, 232);
+            window.setScene(scene);
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.showAndWait();
+        } catch (Exception e) {e.getStackTrace(); }
+    }
+
+    public void exit() {
+        /*view_model.stopServer();
+        System.exit(0);*/
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            view_model.stopServer();
+            System.exit(0);
+            // ... user chose OK
+            // Stop servers
+            // Close program
         }
     }
 }

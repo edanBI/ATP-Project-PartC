@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="229.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+   <children>
+      <TextArea editable="false" prefHeight="230.0" prefWidth="600.0" text="Hello! &#10;This amazing maze game was created by the fabulous programmers Matan Bruker &amp; Edan Ben Ivri.&#10;&#10;&#10;This maze can generate a random maze according to the user heigh and width input.  There are two&#10;methods you can generate the maze with:&#10;1. SimpleMaze - generates a rather simple maze. &#10;2. MyMaze - generate a rather complex maze using Prim algorithm.&#10;&#10;The maze ilustrates Miri Regev failure to bring Messi to play in jerusalem.&#10;Help Miri to catch Messi!" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>

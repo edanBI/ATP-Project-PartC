@@ -14,4 +14,5 @@ public interface IModel {
     int getCharacterPositionColumn();
     int getGoalPositionColumn();
     int getGoalPositionRow();
+    void stopServers();
 }
