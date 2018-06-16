@@ -27,12 +27,16 @@ public class Main extends Application{
 
         primaryStage.setTitle("Miri Fun Run");
         FXMLLoader fx_loader = new FXMLLoader();
+        MyViewController view_controller = fx_loader.getController();
+        fx_loader.setRoot(this);
+        fx_loader.setController(view_controller);
+        //Parent root = fx_loader.load(getClass().getResource("MyView.fxml").openStream());
         Parent root = fx_loader.load(getClass().getResource("MyView.fxml").openStream());
+        fx_loader.setClassLoader(getClass().getClassLoader());
         Scene main_scene = new Scene(root, 1200, 800);
         main_scene.getStylesheets().add(getClass().getResource("MyViewStyle.css").toExternalForm());
         primaryStage.setScene(main_scene);
 
-        MyViewController view_controller = fx_loader.getController();
         view_controller.setResizeEvent(main_scene);
         view_controller.setViewModel(view_model);
         view_model.addObserver(view_controller);

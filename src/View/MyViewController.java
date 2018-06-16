@@ -11,14 +11,12 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.RadioMenuItem;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -28,7 +26,10 @@ import java.io.*;
 import java.security.spec.ECField;
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Optional;
 
 public class MyViewController implements Observer, IView {
 
@@ -39,11 +40,6 @@ public class MyViewController implements Observer, IView {
     public javafx.scene.control.TextField txtfld_columnsNum;
     /*public javafx.scene.control.Label lbl_rowsNum;
     public javafx.scene.control.Label lbl_columnsNum;*/
-    public javafx.scene.control.RadioMenuItem rmi_BFS;
-    public javafx.scene.control.RadioMenuItem rmi_DFS;
-    public javafx.scene.control.RadioMenuItem rmi_BestFS;
-    public javafx.scene.control.RadioMenuItem rmi_SimpleMaze;
-    public javafx.scene.control.RadioMenuItem rmi_MyMaze;
     public javafx.scene.control.Label lbl_character_pos;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
@@ -99,7 +95,6 @@ public class MyViewController implements Observer, IView {
         //my_viewModel.btn_solveMaze();
         //mazeDisplayer.setSolution(sol);
         //mazeDisplayer.requestFocus();
-        btn_solveMaze.setDisable(false);
     }
 
     public void generateMaze() {
@@ -176,8 +171,8 @@ public class MyViewController implements Observer, IView {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 if (mazeDisplayer.getMaze() != null) {
-                    mazeDisplayer.setWidth((double)newSceneWidth-190);
-                    mazeDisplayer.redraw();
+                    mazeDisplayer.setWidth((double) newSceneWidth - 190);
+                    //mazeDisplayer.redraw();
                 }
             }
         });
@@ -186,7 +181,9 @@ public class MyViewController implements Observer, IView {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 if (mazeDisplayer.getMaze() != null) {
-                    mazeDisplayer.setHeight((double)newSceneWidth-60);
+                    mazeDisplayer.setHeight((double) newSceneWidth - 60);
+                    if (view_model.getSolution() != null)
+                        mazeDisplayer.setWantSolution(true);
                     mazeDisplayer.redraw();
                 }
             }
@@ -194,11 +191,8 @@ public class MyViewController implements Observer, IView {
     }
 
     public void properties() {
-        rmi_BFS.setOnAction(event ->
-                System.out.println("BFS PRESSED!!")
-        );
-    }
 
+    }
     public void saveMaze() {
         if (view_model.getMaze() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

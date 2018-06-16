@@ -166,6 +166,10 @@ public class MazeDisplayer extends Canvas {
         this.ImageFileNameCharacter.set(imageFileNameCharacter);
     }
 
+    public void setWantSolution(boolean wantSolution) {
+        this.wantSolution = wantSolution;
+    }
+
     public int getCharacterPositionRow() {
         return characterPositionRow;
     }

@@ -26,10 +26,10 @@ public class MyViewModel extends Observable implements Observer {
     private int goalPositionColumnIndex;
     //private Position position;
     private Solution sol;
-    public StringProperty characterPositionRow = new SimpleStringProperty(" "); //For Binding
-    public StringProperty characterPositionColumn = new SimpleStringProperty(" "); //For Binding
-    public StringProperty goalPositionRow = new SimpleStringProperty(" ");
-    public StringProperty goalPositionColumn = new SimpleStringProperty(" ");
+    public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
+    public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
+    public StringProperty goalPositionRow = new SimpleStringProperty("1");
+    public StringProperty goalPositionColumn = new SimpleStringProperty("1");
     public StringProperty character_Position = new SimpleStringProperty(" ");
 
     public MyViewModel(IModel model){

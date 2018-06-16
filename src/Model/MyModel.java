@@ -74,6 +74,7 @@ public class MyModel extends Observable implements IModel {
                     }
                 }
             });
+            mazeSolution = null;
             client.communicateWithServer();
         } catch (UnknownHostException e) {
             e.printStackTrace();
