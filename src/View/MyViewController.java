@@ -11,12 +11,14 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -26,10 +28,7 @@ import java.io.*;
 import java.security.spec.ECField;
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
+import java.util.*;
 
 public class MyViewController implements Observer, IView {
 
@@ -40,6 +39,11 @@ public class MyViewController implements Observer, IView {
     public javafx.scene.control.TextField txtfld_columnsNum;
     /*public javafx.scene.control.Label lbl_rowsNum;
     public javafx.scene.control.Label lbl_columnsNum;*/
+    public javafx.scene.control.RadioMenuItem rmi_BFS;
+    public javafx.scene.control.RadioMenuItem rmi_DFS;
+    public javafx.scene.control.RadioMenuItem rmi_BestFS;
+    public javafx.scene.control.RadioMenuItem rmi_SimpleMaze;
+    public javafx.scene.control.RadioMenuItem rmi_MyMaze;
     public javafx.scene.control.Label lbl_character_pos;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
@@ -95,6 +99,7 @@ public class MyViewController implements Observer, IView {
         //my_viewModel.btn_solveMaze();
         //mazeDisplayer.setSolution(sol);
         //mazeDisplayer.requestFocus();
+        btn_solveMaze.setDisable(false);
     }
 
     public void generateMaze() {
@@ -189,8 +194,11 @@ public class MyViewController implements Observer, IView {
     }
 
     public void properties() {
-
+        rmi_BFS.setOnAction(event ->
+                System.out.println("BFS PRESSED!!")
+        );
     }
+
     public void saveMaze() {
         if (view_model.getMaze() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -209,27 +217,30 @@ public class MyViewController implements Observer, IView {
         File file = dialog.showSaveDialog(new Stage());
         if (file != null) {
             try {
-                FileWriter fw = new FileWriter(file);
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(num_rows);
-                bw.newLine();
-                bw.write(num_cols);
-                bw.newLine();
-                bw.write(view_model.getMaze().getStartPosition().toString());
-                bw.newLine();
-                bw.write(view_model.getMaze().getGoalPosition().toString());
-                bw.newLine();
-                for (int i=0; i<view_model.getMaze().getM_arr().length; i++){
-                    for (int j=0; j<view_model.getMaze().getM_arr()[i].length; j++) {
-                        bw.write(Integer.toString(view_model.getMaze().getM_arr()[i][j]));
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
+                FileOutputStream out = new FileOutputStream(file);
+                out.write(view_model.getMaze().toByteArray());
+                out.close();
             }
             catch (IOException e) { e.printStackTrace(); }
         }
+    }
+
+    public void loadMaze() {
+        try {
+            FileChooser dialog = new FileChooser();
+            FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("All maze files (*.maze)", "*.maze");
+            dialog.setTitle("Load Maze");
+            dialog.getExtensionFilters().add(filter);
+            File file = dialog.showOpenDialog(new Stage());
+            if (file == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Select .maze file");
+                alert.showAndWait();
+                return;
+            }
+            view_model.loadMaze(file);
+        }
+        catch (FileNotFoundException e) { e.printStackTrace(); }
     }
 
     public void About() {

@@ -87,6 +87,22 @@ public class MyModel extends Observable implements IModel {
     }
 
     @Override
+    public void loadMaze(File maze_file) throws FileNotFoundException {
+        try {
+            FileInputStream in = new FileInputStream(maze_file);
+            byte[] tmp = new byte[1000024];
+            in.read(tmp);
+            m_maze = new Maze(tmp);
+        } catch (IOException e) {e.printStackTrace();}
+        characterPositionRow = m_maze.getStartPosition().getRowIndex();
+        characterPositionColumn = m_maze.getStartPosition().getColumnIndex();
+        goalPositionRow = m_maze.getGoalPosition().getRowIndex();
+        goalPositionColumn = m_maze.getGoalPosition().getColumnIndex();
+        setChanged();
+        notifyObservers("maze generated");
+    }
+
+    @Override
     public void solveMaze() {
         try {
             if (m_maze == null)

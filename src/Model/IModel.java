@@ -4,6 +4,9 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public interface IModel {
     void generateMaze(int row, int col);
     void solveMaze ();
@@ -15,4 +18,5 @@ public interface IModel {
     int getGoalPositionColumn();
     int getGoalPositionRow();
     void stopServers();
+    void loadMaze(File maze_file) throws FileNotFoundException;
 }

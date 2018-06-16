@@ -28,7 +28,7 @@ public class Main extends Application{
         primaryStage.setTitle("Miri Fun Run");
         FXMLLoader fx_loader = new FXMLLoader();
         Parent root = fx_loader.load(getClass().getResource("MyView.fxml").openStream());
-        Scene main_scene = new Scene(root, 700, 500);
+        Scene main_scene = new Scene(root, 1200, 800);
         main_scene.getStylesheets().add(getClass().getResource("MyViewStyle.css").toExternalForm());
         primaryStage.setScene(main_scene);
 
@@ -48,11 +48,7 @@ public class Main extends Application{
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     model.stopServers();
-                    // ... user chose OK
-                    // Stop servers
-                    // Close program
                 } else {
-                    // ... user chose CANCEL or closed the dialog
                     windowEvent.consume();
                 }
             }

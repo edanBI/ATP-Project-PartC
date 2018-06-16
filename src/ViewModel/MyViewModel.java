@@ -10,6 +10,9 @@ import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,10 +26,10 @@ public class MyViewModel extends Observable implements Observer {
     private int goalPositionColumnIndex;
     //private Position position;
     private Solution sol;
-    public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
-    public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
-    public StringProperty goalPositionRow = new SimpleStringProperty("1");
-    public StringProperty goalPositionColumn = new SimpleStringProperty("1");
+    public StringProperty characterPositionRow = new SimpleStringProperty(" "); //For Binding
+    public StringProperty characterPositionColumn = new SimpleStringProperty(" "); //For Binding
+    public StringProperty goalPositionRow = new SimpleStringProperty(" ");
+    public StringProperty goalPositionColumn = new SimpleStringProperty(" ");
     public StringProperty character_Position = new SimpleStringProperty(" ");
 
     public MyViewModel(IModel model){
@@ -108,5 +111,9 @@ public class MyViewModel extends Observable implements Observer {
 
     public void stopServer() {
         model.stopServers();
+    }
+
+    public void loadMaze(File maze_file) throws FileNotFoundException {
+        model.loadMaze(maze_file);
     }
 }

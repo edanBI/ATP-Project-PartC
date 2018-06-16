@@ -3,6 +3,7 @@
 <?import View.MazeDisplayer?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -75,7 +76,7 @@
             <items>
               <MenuItem mnemonicParsing="false" text="New Maze" />
                   <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#loadMaze" text="Load" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Options">
@@ -84,18 +85,21 @@
                      <items>
                         <Menu mnemonicParsing="false" text="Solver Type">
                           <items>
-                              <RadioMenuItem mnemonicParsing="false" text="BFS" />
-                              <RadioMenuItem mnemonicParsing="false" text="DFS" />
-                              <RadioMenuItem mnemonicParsing="false" text="BestFS" />
+                              <RadioMenuItem fx:id="rmi_BFS" mnemonicParsing="false" onAction="#properties" text="BFS" />
+                              <RadioMenuItem fx:id="rmi_DFS" mnemonicParsing="false" text="DFS" />
+                              <RadioMenuItem fx:id="rmi_BestFS" mnemonicParsing="false" text="BestFS" />
                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Maze Type">
                            <items>
-                              <RadioMenuItem mnemonicParsing="false" text="SimpleMaze" />
-                              <RadioMenuItem mnemonicParsing="false" text="MyMaze" />
+                              <RadioMenuItem fx:id="rmi_SimpleMaze" mnemonicParsing="false" text="SimpleMaze" />
+                              <RadioMenuItem fx:id="rmi_MyMaze" mnemonicParsing="false" text="MyMaze" />
                            </items>
                         </Menu>
                      </items>
+                     <graphic>
+                        <ChoiceBox prefWidth="150.0" />
+                     </graphic>
                   </Menu>
                </items></Menu>
           <Menu mnemonicParsing="false" text="Information">
