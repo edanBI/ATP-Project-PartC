@@ -2,10 +2,11 @@ package View;
 /*
 Observe View Model
 */
-import IO.MyDecompressorInputStream;
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
-import com.sun.deploy.util.SystemUtils;
+import algorithms.search.AState;
+import algorithms.search.MazeState;
+import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -13,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,35 +25,58 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.security.spec.ECField;
+import java.net.URL;
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Optional;
+import java.util.*;
 
-public class MyViewController implements Observer, IView {
+public class MyViewController implements Observer, IView, Initializable{
+
+    private MyViewModel view_model;
+    private boolean prop_update;
+    private Properties prop;
 
     @FXML
-    private MyViewModel view_model;
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.TextField txtfld_rowsNum;
     public javafx.scene.control.TextField txtfld_columnsNum;
-    /*public javafx.scene.control.Label lbl_rowsNum;
-    public javafx.scene.control.Label lbl_columnsNum;*/
     public javafx.scene.control.Label lbl_character_pos;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
+    public javafx.scene.control.Button btn_hideSolution;
+    public javafx.scene.control.RadioMenuItem rmi_bfs;
+    public javafx.scene.control.RadioMenuItem rmi_dfs;
+    public javafx.scene.control.RadioMenuItem rmi_best;
+    public javafx.scene.control.RadioMenuItem rmi_sGen;
+    public javafx.scene.control.RadioMenuItem rmi_mGen;
 
-    //private boolean isGenerated = false;
+    public MyViewController() {
+        prop_update = false;
+        prop = new Properties();
+        OutputStream _out;
+        InputStream _in;
+        try {
+            _in = new FileInputStream("resources/config.properties");
+            prop.load(_in);
+            _in.close();
+
+            _out = new FileOutputStream("resources/config.properties");
+            prop.setProperty("SolvingAlgorithm", "BestFirstSearch");
+            prop.setProperty("generateAlgorithm", "MyMazeGenerator");
+
+            prop.store(_out, null);
+            _out.close();
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+
+    }
 
     public void setViewModel(MyViewModel my_viewModel) {
         this.view_model = my_viewModel;
         mazeDisplayer.requestFocus();
         bindProperties(my_viewModel);
     }
-
     /*
      * binds the text label in the main menu to the my_viewModel in the background
      * */
@@ -77,10 +102,25 @@ public class MyViewController implements Observer, IView {
                 mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
                 this.characterPositionRow.set(positionRow + "");
                 this.characterPositionColumn.set(positionColumn + "");
+                String curr_pos = "{"+positionRow+","+positionColumn+"}";
+                if (mazeDisplayer.wantSolution && view_model.getSolution()!= null) {
+                    //TODO - need to add a loop that deletes all the AStates that are behind miri in the solution because they became irrelevant.
+                    ArrayList<AState> sol = view_model.getSolution().getSolutionPath();
+                    if (sol.get(1).toString().equals(curr_pos)) {
+                        sol.remove(0);
+                        //System.out.println(sol.get(0).toString());
+                        view_model.updateSolution(new Solution(sol));
+                        mazeDisplayer.redraw();
+                    }
+                    /*for (int i=sol.size()-1; i >= 0; i--) {
+                        System.out.println(sol.get(i));
+                    }*/
+                    //mazeDisplayer.setSolution(_sol);
+                    //mazeDisplayer.redraw();
+                }
             }
         }
     }
-
     @Override
     public void displayMaze(Maze maze) {
         mazeDisplayer.setMaze(maze);
@@ -94,7 +134,8 @@ public class MyViewController implements Observer, IView {
         this.characterPositionColumn.set(character_pos_col + "");
         //my_viewModel.btn_solveMaze();
         //mazeDisplayer.setSolution(sol);
-        //mazeDisplayer.requestFocus();
+        mazeDisplayer.requestFocus();
+        btn_solveMaze.setDisable(false);
     }
 
     public void generateMaze() {
@@ -107,16 +148,30 @@ public class MyViewController implements Observer, IView {
         update(view_model, new Object());
 
         view_model.generateMaze(width, height);
-
-
     }
 
     public void solveMaze(ActionEvent actionEvent) {
-        //showAlert("Solving maze..");
-        if (view_model.getMaze() != null) {
-            btn_solveMaze.setDisable(true);
-            view_model.solveMaze();
+        btn_hideSolution.setDisable(false);
+        if (prop_update) {
+            if (view_model.getMaze() != null) {
+                btn_solveMaze.setDisable(true);
+                view_model.solveMaze();
+            }
         }
+        else {
+            if (view_model.getMaze() != null) {
+                btn_solveMaze.setDisable(true);
+                view_model.solveMaze();
+            }
+        }
+
+        prop_update = false;
+    }
+
+    public void hideSolution() {
+        mazeDisplayer.wantSolution = false;
+        displayMaze(view_model.getMaze());
+        btn_hideSolution.setDisable(true);
     }
 
     private void showAlert(String alertMessage) {
@@ -143,7 +198,6 @@ public class MyViewController implements Observer, IView {
 
     }
 
-    //region String Property for Binding
     public StringProperty characterPositionRow = new SimpleStringProperty();
 
     public StringProperty characterPositionColumn = new SimpleStringProperty();
@@ -165,8 +219,6 @@ public class MyViewController implements Observer, IView {
     }
 
     public void setResizeEvent(Scene scene) {
-        long width = 0;
-        long height = 0;
         scene.widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
@@ -191,8 +243,37 @@ public class MyViewController implements Observer, IView {
     }
 
     public void properties() {
+        OutputStream _out;
+        InputStream _in;
+        try {
+            _in = new FileInputStream("resources/config.properties");
+            prop.load(_in);
+            _in.close();
 
+            _out = new FileOutputStream("resources/config.properties");
+            if (rmi_bfs.isSelected()) {
+                prop.setProperty("SolvingAlgorithm", "BreadthFirstSearch");
+            } else if (rmi_dfs.isSelected()) {
+                prop.setProperty("SolvingAlgorithm", "DepthFirstSearch");
+            } else if (rmi_best.isSelected()) {
+                prop.setProperty("SolvingAlgorithm", "BestFirstSearch");
+            }
+
+            if (rmi_sGen.isSelected()) {
+                prop.setProperty("generateAlgorithm", "SimpleMazeGenerator");
+            } else if (rmi_mGen.isSelected()) {
+                prop.setProperty("generateAlgorithm", "MyMazeGenerator");
+            }
+
+            prop.store(_out, null);
+            _out.close();
+            view_model.updateServers();
+            prop_update = true;
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
     }
+
     public void saveMaze() {
         if (view_model.getMaze() == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -269,5 +350,18 @@ public class MyViewController implements Observer, IView {
             view_model.stopServer();
             System.exit(0);
         }
+    }
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

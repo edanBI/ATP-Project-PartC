@@ -7,8 +7,6 @@ import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -59,7 +57,7 @@ public class MazeDisplayer extends Canvas {
             solution = sol;
             wantSolution = true;
             redraw();
-            wantSolution = false;
+            //wantSolution = false;
         }
     }
 
@@ -125,7 +123,7 @@ public class MazeDisplayer extends Canvas {
                         }
                     }
                 }
-                wantSolution = false;
+                //wantSolution = false;
                 //Draw Character
                 //gc.setFill(Color.RED);
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);

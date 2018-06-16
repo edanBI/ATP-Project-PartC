@@ -50,6 +50,11 @@ public class MyModel extends Observable implements IModel {
         System.out.println("Solve Server has Stopped");
     }
 
+    public void updateServers() {
+        generateServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        solveServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+    }
+
     @Override
     public void generateMaze(int row, int col) {
         try {
@@ -68,7 +73,7 @@ public class MyModel extends Observable implements IModel {
                         byte[] decompressedMaze = new byte[1000012 /*assuming biggest m_maze is 1000x1000*/]; //allocating byte[] for the decompressed m_maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         m_maze = new Maze(decompressedMaze);
-                        m_maze.print();
+                        //m_maze.print();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -106,6 +111,7 @@ public class MyModel extends Observable implements IModel {
     @Override
     public void solveMaze() {
         try {
+            mazeSolution = null;
             if (m_maze == null)
                 return;
             Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
@@ -252,5 +258,10 @@ public class MyModel extends Observable implements IModel {
 
     public int getGoalPositionRow() {
         return goalPositionRow;
+    }
+
+    @Override
+    public void updateSolution(Solution solution) {
+        this.mazeSolution = solution;
     }
 }

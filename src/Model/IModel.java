@@ -19,4 +19,6 @@ public interface IModel {
     int getGoalPositionRow();
     void stopServers();
     void loadMaze(File maze_file) throws FileNotFoundException;
+    void updateServers();
+    void updateSolution(Solution solution);
 }

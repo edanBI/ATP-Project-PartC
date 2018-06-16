@@ -116,4 +116,12 @@ public class MyViewModel extends Observable implements Observer {
     public void loadMaze(File maze_file) throws FileNotFoundException {
         model.loadMaze(maze_file);
     }
+
+    public void updateServers() {
+        model.updateServers();
+    }
+
+    public void updateSolution(Solution solution) {
+        model.updateSolution(solution);
+    }
 }

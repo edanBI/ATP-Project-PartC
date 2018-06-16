@@ -9,6 +9,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.SepiaTone?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -41,8 +42,8 @@
                     <TextField fx:id="txtfld_rowsNum" disable="false" text="10" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                     <TextField fx:id="txtfld_columnsNum" disable="false" text="10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Button fx:id="btn_generateMaze" onAction="#generateMaze" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                    <Button fx:id="btn_solveMaze" onAction="#solveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-                    <Button cancelButton="true" onAction="#solveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                    <Button fx:id="btn_solveMaze" disable="true" onAction="#solveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+               <Button fx:id="btn_hideSolution" disable="true" layoutX="10.0" layoutY="100.0" onAction="#hideSolution" prefHeight="25.0" prefWidth="167.0" text="Hide Solution" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                     <Label prefHeight="16.0" prefWidth="114.0" text="Miri's Position:" GridPane.rowIndex="5">
                         <font>
                             <Font name="Arial Bold" size="14.0" />
@@ -73,7 +74,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="New Maze" />
+              <MenuItem mnemonicParsing="false" onAction="#generateMaze" text="New Maze" />
                   <MenuItem mnemonicParsing="false" onAction="#saveMaze" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#loadMaze" text="Load" />
             </items>
@@ -83,32 +84,38 @@
                   <Menu mnemonicParsing="false" text="Properties">
                      <items>
                         <Menu mnemonicParsing="false" text="Solver Type">
-                          <items>
-                              <RadioMenuItem mnemonicParsing="false" text="BFS" />
-                              <RadioMenuItem mnemonicParsing="false" text="DFS" />
-                              <RadioMenuItem mnemonicParsing="false" text="BestFS" />
-                          </items>
-                        </Menu>
+                           <items>
+                              <RadioMenuItem fx:id="rmi_bfs" mnemonicParsing="false" onAction="#properties" text="BFS">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="solver_type" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem fx:id="rmi_dfs" mnemonicParsing="false" onAction="#properties" text="DFS" toggleGroup="$solver_type" />
+                              <RadioMenuItem fx:id="rmi_best" mnemonicParsing="false" onAction="#properties" selected="true" text="BestFS" toggleGroup="$solver_type" />
+                           </items></Menu>
                         <Menu mnemonicParsing="false" text="Maze Type">
                            <items>
-                              <RadioMenuItem mnemonicParsing="false" text="SimpleMaze" />
-                              <RadioMenuItem mnemonicParsing="false" text="MyMaze" />
+                              <RadioMenuItem fx:id="rmi_sGen" mnemonicParsing="false" onAction="#properties" text="SimpleMaze">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="generate_type" />
+                                 </toggleGroup></RadioMenuItem>
+                              <RadioMenuItem fx:id="rmi_mGen" mnemonicParsing="false" onAction="#properties" selected="true" text="MyMaze" toggleGroup="$generate_type" />
                            </items>
                         </Menu>
                      </items>
                   </Menu>
                </items></Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Information">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#About" text="About" />
                   <MenuItem mnemonicParsing="false" onAction="#Help" text="Help" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-               </items>
-            </Menu>
         </menus>
       </MenuBar>
    </top>
