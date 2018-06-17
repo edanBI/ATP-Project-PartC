@@ -20,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,6 +37,7 @@ public class MyViewController implements Observer, IView, Initializable{
     private MyViewModel view_model;
     private boolean prop_update;
     private Properties prop;
+    private int sound;
 
     @FXML
     public MazeDisplayer mazeDisplayer;
@@ -52,6 +55,7 @@ public class MyViewController implements Observer, IView, Initializable{
 
     public MyViewController() {
         prop_update = false;
+        sound = 0;
         prop = new Properties();
         OutputStream _out;
         InputStream _in;
@@ -102,21 +106,17 @@ public class MyViewController implements Observer, IView, Initializable{
                 mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
                 this.characterPositionRow.set(positionRow + "");
                 this.characterPositionColumn.set(positionColumn + "");
-                String curr_pos = "{"+positionRow+","+positionColumn+"}";
-                if (mazeDisplayer.wantSolution && view_model.getSolution()!= null) {
-                    //TODO - need to add a loop that deletes all the AStates that are behind miri in the solution because they became irrelevant.
-                    ArrayList<AState> sol = view_model.getSolution().getSolutionPath();
-                    if (sol.get(1).toString().equals(curr_pos)) {
-                        sol.remove(0);
-                        //System.out.println(sol.get(0).toString());
-                        view_model.updateSolution(new Solution(sol));
+
+                String curr_pos = "{" + positionRow + "," + positionColumn + "}";
+                if (mazeDisplayer.wantSolution && view_model.getSolution() != null) {
+                    ArrayList<AState> solution_arr = view_model.getSolution().getSolutionPath();
+                    if (solution_arr.get(1).toString().equals(curr_pos)) {
+                        solution_arr.remove(0);
+                        Solution new_sol = new Solution(solution_arr);
+                        view_model.updateSolution(new_sol);
+                        mazeDisplayer.setSolution(new_sol);
                         mazeDisplayer.redraw();
                     }
-                    /*for (int i=sol.size()-1; i >= 0; i--) {
-                        System.out.println(sol.get(i));
-                    }*/
-                    //mazeDisplayer.setSolution(_sol);
-                    //mazeDisplayer.redraw();
                 }
             }
         }
@@ -185,6 +185,21 @@ public class MyViewController implements Observer, IView, Initializable{
         alert.initModality(Modality.APPLICATION_MODAL);
         alert.setContentText(alertMessage);
         alert.show();
+    }
+
+    public void mouseDrag(MouseEvent mouse_event) {
+        mazeDisplayer.requestFocus();
+        int c_row = Integer.valueOf(txtfld_rowsNum.getText());
+        int c_col = Integer.valueOf(txtfld_columnsNum.getText());
+
+        int zero_x = (int) mazeDisplayer.getScene().getX();
+        int zero_y = (int) mazeDisplayer.getScene().getY();
+
+        System.out.println(zero_x + ", " + zero_y);
+        System.out.println(mouse_event.getX() + ", " + mouse_event.getY());
+        /*if (mouse_event.isPrimaryButtonDown() && mouse_event.isDragDetect()) {
+            //view_model.characterMouseDrag(mouse_event);
+        }*/
     }
 
     public void KeyPressed(KeyEvent keyEvent) {
@@ -363,5 +378,10 @@ public class MyViewController implements Observer, IView, Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void mute() {
+        view_model.mute(sound);
+        sound++;
     }
 }

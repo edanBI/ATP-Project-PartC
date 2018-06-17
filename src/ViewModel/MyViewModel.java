@@ -10,6 +10,8 @@ import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +42,9 @@ public class MyViewModel extends Observable implements Observer {
     public void update(Observable o, Object arg) {
         if (o == model) {
             if (arg.equals("maze generated")){
+                model.stopMusic();
+                model.music();
+
                 characterPositionRowIndex = model.getCharacterPositionRow();
                 characterPositionRow.set(characterPositionRowIndex + "");
                 characterPositionColumnIndex = model.getCharacterPositionColumn();
@@ -123,5 +128,13 @@ public class MyViewModel extends Observable implements Observer {
 
     public void updateSolution(Solution solution) {
         model.updateSolution(solution);
+    }
+
+    public void characterMouseDrag(MouseEvent mouseDragEvent) {
+        model.characterMouseDrag(mouseDragEvent);
+    }
+
+    public void mute (int i) {
+        model.mute(i);
     }
 }

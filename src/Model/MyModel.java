@@ -12,6 +12,10 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 import Client.Client;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -29,11 +33,14 @@ public class MyModel extends Observable implements IModel {
     private Server solveServer;
     private int goalPositionRow;
     private int goalPositionColumn;
+    private MediaPlayer MP;
 
     public MyModel() {
         //Raise the servers
         generateServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
         solveServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+        Media media = new Media(new File("./resources/Images/miri_song.mp3").toURI().toString());
+        MP =new MediaPlayer(media);
     }
 
     public void startServers() {
@@ -263,5 +270,29 @@ public class MyModel extends Observable implements IModel {
     @Override
     public void updateSolution(Solution solution) {
         this.mazeSolution = solution;
+    }
+
+    @Override
+    public void characterMouseDrag(MouseEvent mouseDragEvent) {
+        int curr_row = (int) mouseDragEvent.getX();
+        int curr_col = (int) mouseDragEvent.getY();
+        if (legal_move(curr_row, curr_col)) {
+
+        }
+    }
+
+    public void mute(int i) {
+        if (i % 2 != 0)
+            MP.setMute(false);
+        else
+            MP.setMute(true);
+    }
+
+    public void music(){
+        MP.play();
+    }
+
+    public void stopMusic() {
+        MP.stop();
     }
 }
