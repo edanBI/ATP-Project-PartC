@@ -12,6 +12,7 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -38,6 +40,7 @@ public class MyViewController implements Observer, IView, Initializable{
     private boolean prop_update;
     private Properties prop;
     private int sound;
+    private int curr_width, curr_height;
 
     @FXML
     public MazeDisplayer mazeDisplayer;
@@ -59,6 +62,8 @@ public class MyViewController implements Observer, IView, Initializable{
         prop = new Properties();
         OutputStream _out;
         InputStream _in;
+        curr_height = 0;
+        curr_width = 0;
         try {
             _in = new FileInputStream("resources/config.properties");
             prop.load(_in);
@@ -138,6 +143,21 @@ public class MyViewController implements Observer, IView, Initializable{
         btn_solveMaze.setDisable(false);
     }
 
+    private void displayMaze(Maze maze, double width, double height) {
+        mazeDisplayer.setScaleX(width*0.1);
+        mazeDisplayer.setScaleY((height*0.1));
+        /*mazeDisplayer.setWidth(width);
+        mazeDisplayer.setHeight(height);*/
+        mazeDisplayer.setMaze(maze);
+        int character_pos_row = view_model.getCharacterPositionRow();
+        int character_pos_col = view_model.getCharacterPositionColumn();
+        mazeDisplayer.setCharacterPosition(character_pos_row, character_pos_col); // display character on screen
+        this.characterPositionRow.set(character_pos_row + "");
+        this.characterPositionColumn.set(character_pos_col + "");
+        mazeDisplayer.requestFocus();
+        btn_solveMaze.setDisable(false);
+    }
+
     public void generateMaze() {
         int height = Integer.valueOf(txtfld_rowsNum.getText());
         int width = Integer.valueOf(txtfld_columnsNum.getText());
@@ -191,15 +211,28 @@ public class MyViewController implements Observer, IView, Initializable{
         mazeDisplayer.requestFocus();
         int c_row = Integer.valueOf(txtfld_rowsNum.getText());
         int c_col = Integer.valueOf(txtfld_columnsNum.getText());
+        double cc = mazeDisplayer.getParent().getBoundsInParent().getMinX();
+        System.out.println(cc);
+        int mouse_x = (int)(mouse_event.getX()-178);
+        int mouse_y = (int)(mouse_event.getY()-32);
 
-        int zero_x = (int) mazeDisplayer.getScene().getX();
-        int zero_y = (int) mazeDisplayer.getScene().getY();
+        if (mouse_event.isPrimaryButtonDown()) {
+            view_model.characterMouseDrag((int)((mouse_y / mazeDisplayer.getHeight())*c_row), (int)((mouse_x / mazeDisplayer.getWidth())*c_col));
+        }
+    }
 
-        System.out.println(zero_x + ", " + zero_y);
-        System.out.println(mouse_event.getX() + ", " + mouse_event.getY());
-        /*if (mouse_event.isPrimaryButtonDown() && mouse_event.isDragDetect()) {
-            //view_model.characterMouseDrag(mouse_event);
-        }*/
+    public void mouseScroll(ScrollEvent scrollEvent) {
+        if (scrollEvent.isControlDown()) {
+            if (scrollEvent.getDeltaY() > 0) { //for zooming in
+                mazeDisplayer.setScaleX(mazeDisplayer.getScaleX()*1.01);
+                mazeDisplayer.setScaleY(mazeDisplayer.getScaleY()*1.01);
+
+            }
+            else { //for zooming out
+                mazeDisplayer.setScaleX(mazeDisplayer.getScaleX()/1.01);
+                mazeDisplayer.setScaleY(mazeDisplayer.getScaleY()/1.01);
+            }
+        }
     }
 
     public void KeyPressed(KeyEvent keyEvent) {

@@ -89,15 +89,11 @@ public class MazeDisplayer extends Canvas {
 
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.clearRect(0, 0, getWidth(), getHeight());
-                //gc.clearRect(0, 0, canvasWidth, canvasHeight);
-
-
                 //Draw Maze
                 for (int i = 0; i < maze.length; i++) { // i == row - y axis
                     for (int j = 0; j < maze[i].length; j++) { // j == col - x axis
                         if (maze[i][j] == 1) {
                             gc.drawImage(wallImage, j * cellWidth, i* cellHeight, cellWidth, cellHeight);
-                            //gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
                         }
                         else {
                             gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
@@ -129,6 +125,7 @@ public class MazeDisplayer extends Canvas {
                 //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
                 //gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
                 //gc.drawImage(goalImage, goalPositionColumn * cellWidth, goalPositionRow * cellHeight, cellWidth, cellHeight);
+
             } catch (FileNotFoundException e) {
                 //e.printStackTrace();
             }
@@ -174,7 +171,6 @@ public class MazeDisplayer extends Canvas {
     public int getCharacterPositionColumn() {
         return characterPositionColumn;
     }
-
 }
 
 

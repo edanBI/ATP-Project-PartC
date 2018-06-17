@@ -10,7 +10,6 @@ import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
@@ -130,8 +129,8 @@ public class MyViewModel extends Observable implements Observer {
         model.updateSolution(solution);
     }
 
-    public void characterMouseDrag(MouseEvent mouseDragEvent) {
-        model.characterMouseDrag(mouseDragEvent);
+    public void characterMouseDrag(int row_pos, int col_pos) {
+        model.characterMouseDrag(row_pos, col_pos);
     }
 
     public void mute (int i) {

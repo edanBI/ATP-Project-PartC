@@ -12,8 +12,6 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.Solution;
 import javafx.scene.input.KeyCode;
 import Client.Client;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -273,25 +271,32 @@ public class MyModel extends Observable implements IModel {
     }
 
     @Override
-    public void characterMouseDrag(MouseEvent mouseDragEvent) {
-        int curr_row = (int) mouseDragEvent.getX();
-        int curr_col = (int) mouseDragEvent.getY();
-        if (legal_move(curr_row, curr_col)) {
-
-        }
+    public void characterMouseDrag(int row, int col) {
+        if (row == characterPositionRow && col == characterPositionColumn)
+            return;
+        if (row==characterPositionRow+1 && col==characterPositionColumn-1) moveCharacter(KeyCode.NUMPAD1);
+        else if (row==characterPositionRow+1 && col==characterPositionColumn) moveCharacter(KeyCode.NUMPAD2);
+        else if (row==characterPositionRow+1 && col==characterPositionColumn+1) moveCharacter(KeyCode.NUMPAD3);
+        else if (row==characterPositionRow && col==characterPositionColumn-1) moveCharacter(KeyCode.NUMPAD4);
+        else if (row==characterPositionRow && col==characterPositionColumn+1) moveCharacter(KeyCode.NUMPAD6);
+        else if (row==characterPositionRow-1 && col==characterPositionColumn-1) moveCharacter(KeyCode.NUMPAD7);
+        else if (row==characterPositionRow-1 && col==characterPositionColumn) moveCharacter(KeyCode.NUMPAD8);
+        else if (row==characterPositionRow-1 && col==characterPositionColumn+1) moveCharacter(KeyCode.NUMPAD9);
     }
 
+    @Override
     public void mute(int i) {
         if (i % 2 != 0)
             MP.setMute(false);
         else
             MP.setMute(true);
     }
-
+    @Override
     public void music(){
+        MP.setVolume(0.3);
         MP.play();
     }
-
+    @Override
     public void stopMusic() {
         MP.stop();
     }
