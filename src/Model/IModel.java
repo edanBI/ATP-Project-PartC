@@ -17,12 +17,13 @@ public interface IModel {
     int getCharacterPositionColumn();
     int getGoalPositionColumn();
     int getGoalPositionRow();
+    void startServers();
     void stopServers();
     void loadMaze(File maze_file) throws FileNotFoundException;
     void updateServers();
     void updateSolution(Solution solution);
     void characterMouseDrag(int row_pos, int row_col);
     void stopMusic();
-    void music();
+    void music(String url);
     void mute(int i);
 }

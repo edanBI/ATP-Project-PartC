@@ -2,6 +2,7 @@
 
 <?import View.MazeDisplayer?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane onKeyPressed="#KeyPressed" onMouseDragged="#mouseDrag" onScroll="#mouseScroll" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
+<BorderPane onKeyPressed="#KeyPressed" onMouseDragged="#mouseDrag" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
     <left>
         <VBox prefHeight="200.0" prefWidth="178.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
@@ -217,9 +218,10 @@
     <center>
         <Pane BorderPane.alignment="CENTER">
             <children>
-            <MazeDisplayer fx:id="mazeDisplayer" height="600.0" imageFileBall="resources/Images/ball.png" imageFileGoal="resources/Images/small_messi_goal.png" imageFileMaze="resources/Images/grass.jpg" imageFileNameCharacter="resources/Images/miri.png" imageFileNameWall="resources/Images/brickWall.jpg" style="-fx-border: black;" width="600.0">
-                    <effect>
-                    </effect></MazeDisplayer>
+            <MazeDisplayer fx:id="mazeDisplayer" height="600.0" imageFileBall="resources/Images/ball.png" imageFileGoal="resources/Images/small_messi_goal.png" imageFileMaze="resources/Images/grass.jpg" imageFileNameCharacter="resources/Images/miri.png" imageFileNameWall="resources/Images/brickWall.jpg" width="900.0">
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis></MazeDisplayer>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

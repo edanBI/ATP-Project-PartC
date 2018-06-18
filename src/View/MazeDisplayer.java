@@ -66,11 +66,12 @@ public class MazeDisplayer extends Canvas {
 
     public void redraw() {
         if (maze != null) {
-            double canvasHeight = getHeight();
-            double canvasWidth = getWidth();
-            double cellHeight = canvasHeight / maze[0].length;
-            double cellWidth = canvasWidth / maze.length;
-
+            /*double cellHeight = getWidth() / maze[0].length;
+            double cellWidth = getHeight() / maze.length;*/
+            double cellWidth = getWidth() / maze[0].length;
+            double cellHeight = getHeight() / maze.length;
+            /*cellHeight-=32;
+            cellWidth-=178;*/
             try {
                 Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
                 Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
@@ -81,28 +82,29 @@ public class MazeDisplayer extends Canvas {
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.drawImage(mazeImage, 0, 0, getWidth(), getHeight());
                 //Draw Maze
-                gc.setFill(Color.TRANSPARENT);
+                //gc.setFill(Color.TRANSPARENT);
+
                 for (int i = 0; i < maze.length; i++) { // i == row - y axis
                     for (int j = 0; j < maze[i].length; j++) { // j == col - x axis
                         if (maze[i][j] == 1) {
-                            gc.drawImage(wallImage, j * cellWidth, i* cellHeight, cellWidth, cellHeight);
+                            gc.drawImage(wallImage, j*cellWidth, i* cellHeight, cellWidth, cellHeight);
                         }
                         if (wantSolution && isGenerated) {
                             List<AState> drawSol = solution.getSolutionPath();
                             for (int k = 0; k < drawSol.size(); k++) {
                                 MazeState state =(MazeState) drawSol.get(k);
                                 if ((state.getPosition().getColumnIndex() == j && state.getPosition().getRowIndex() == i)) {
-                                    gc.drawImage(ballImage,j * cellWidth, i * cellHeight, cellWidth*1.1, cellHeight*1.1);
+                                    gc.drawImage(ballImage,  j*cellWidth, i* cellHeight, cellWidth, cellHeight);
                                     break;
                                 }
                             }
                             gc.setFill(Color.BLACK);
                         }
                         if (j==goal_pos.getColumnIndex() && i==goal_pos.getRowIndex()) {
-                            gc.drawImage(goalImage, goal_pos.getColumnIndex() * cellWidth, goal_pos.getRowIndex() * cellHeight, cellWidth, cellHeight);
+                            gc.drawImage(goalImage, j*cellWidth, i* cellHeight, cellWidth, cellHeight);
                         }
                         if (i == characterPositionRow && j == characterPositionColumn) {
-                            gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
+                            gc.drawImage(characterImage, j*cellWidth, i* cellHeight, cellWidth, cellHeight);
                         }
                     }
                 }

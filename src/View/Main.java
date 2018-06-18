@@ -2,6 +2,7 @@ package View;
 
 import Model.MyModel;
 import ViewModel.MyViewModel;
+import View.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

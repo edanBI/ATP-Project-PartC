@@ -78,7 +78,8 @@ public class MyModel extends Observable implements IModel {
                         byte[] decompressedMaze = new byte[1000012 /*assuming biggest m_maze is 1000x1000*/]; //allocating byte[] for the decompressed m_maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         m_maze = new Maze(decompressedMaze);
-                        //m_maze.print();
+                        m_maze.print();
+                        System.out.println();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -291,9 +292,17 @@ public class MyModel extends Observable implements IModel {
             MP.setMute(true);
     }
     @Override
-    public void music(){
-        MP.setVolume(0.3);
-        MP.play();
+    public void music(String url){
+        if (!url.equals("")) {
+            MP.stop();
+            MediaPlayer tmp = new MediaPlayer(new Media(new File(url).toURI().toString()));
+            tmp.setVolume(0.3);
+            tmp.play();
+        }
+        else {
+            MP.setVolume(0.3);
+            MP.play();
+        }
     }
     @Override
     public void stopMusic() {

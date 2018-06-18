@@ -35,7 +35,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class MyViewController implements Observer, IView, Initializable{
+public class MyViewController implements Observer, IView{
 
     private MyViewModel view_model;
     private boolean prop_update;
@@ -103,12 +103,15 @@ public class MyViewController implements Observer, IView, Initializable{
             if (arg.equals("maze generated")) {
                 displayMaze(view_model.getMaze());
                 btn_generateMaze.setDisable(false);
+                mazeDisplayer.requestFocus();
             }
             if (arg.equals("solution")) {
                 mazeDisplayer.setSolution(view_model.getSolution());
                 btn_solveMaze.setDisable(false);
+                mazeDisplayer.requestFocus();
             }
             if (arg.equals("player moved")) {
+                mazeDisplayer.requestFocus();
                 int positionRow = view_model.getCharacterPositionRow();
                 int positionColumn = view_model.getCharacterPositionColumn();
                 mazeDisplayer.setCharacterPosition(positionRow, positionColumn); // display character on screen
@@ -128,7 +131,24 @@ public class MyViewController implements Observer, IView, Initializable{
                 }
 
                 if (view_model.getGoalPositionRowIndex()==positionRow && view_model.getGoalPositionColumnIndex()==positionColumn){
-                    EndGameDialog.show();
+                    //EndGameDialog.show();
+                    System.out.println("GOAL!");
+                    try {
+                        Stage goal_window = new Stage();
+                        goal_window.setTitle("HAHAHAHAHA");
+                        goal_window.setResizable(false);
+                        Parent layout = new FXMLLoader().load(getClass().getResource("GoalWindow.fxml").openStream());
+                        Scene scene = new Scene(layout, 520, 290);
+                        goal_window.setScene(scene);
+                        goal_window.initModality(Modality.APPLICATION_MODAL);
+
+                        view_model.setSong("./resources/Images/lionel_messi_lololo.mp3");
+                        goal_window.showAndWait();
+
+
+                    } catch (Exception e) {
+                        System.out.println(e.getCause());
+                    }
                 }
             }
         }
@@ -148,19 +168,24 @@ public class MyViewController implements Observer, IView, Initializable{
     }
 
     public void generateMaze() {
-        int height, width;
         try {
-            height = Integer.valueOf(txtfld_rowsNum.getText());
-            width = Integer.valueOf(txtfld_columnsNum.getText());
+            int row_in = Integer.valueOf(txtfld_rowsNum.getText());
+            int col_in = Integer.valueOf(txtfld_columnsNum.getText());
             btn_generateMaze.setDisable(true);
-
-            mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
-            mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);
+            if (row_in < 4)
+                row_in = 4;
+            if (col_in < 4)
+                col_in = 4;
+            //mazeDisplayer.setHeight((double) (newSceneHeight.intValue() - 49));
+            /*mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
+            mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);*/
+            mazeDisplayer.setWidth(mazeDisplayer.getScene().getWidth() - 195);
+            mazeDisplayer.setHeight(mazeDisplayer.getScene().getHeight() - 49);
             update(view_model, new Object());
 
             btn_mute.setDisable(false);
 
-            view_model.generateMaze(width, height);
+            view_model.generateMaze(row_in, col_in);
         }
         catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -267,7 +292,9 @@ public class MyViewController implements Observer, IView, Initializable{
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 if (mazeDisplayer.getMaze() != null) {
-                    mazeDisplayer.setWidth((double) newSceneWidth - 190);
+                    mazeDisplayer.setWidth((double) newSceneWidth.intValue() - 195);
+                    if (view_model.getSolution() != null)
+                        mazeDisplayer.setWantSolution(true);
                     //mazeDisplayer.redraw();
                 }
             }
@@ -275,12 +302,12 @@ public class MyViewController implements Observer, IView, Initializable{
 
         scene.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
                 if (mazeDisplayer.getMaze() != null) {
-                    mazeDisplayer.setHeight((double) newSceneWidth - 60);
+                    mazeDisplayer.setHeight((double) (newSceneHeight.intValue() - 49));
                     if (view_model.getSolution() != null)
                         mazeDisplayer.setWantSolution(true);
-                    mazeDisplayer.redraw();
+                    //mazeDisplayer.redraw();
                 }
             }
         });
@@ -394,11 +421,6 @@ public class MyViewController implements Observer, IView, Initializable{
             view_model.stopServer();
             System.exit(0);
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        //Image wallpaper = new Image("resources/Images/grass.jpg");
     }
 
     public void mute() {

@@ -42,7 +42,7 @@ public class MyViewModel extends Observable implements Observer {
         if (o == model) {
             if (arg.equals("maze generated")){
                 model.stopMusic();
-                model.music();
+                model.music("");
 
                 characterPositionRowIndex = model.getCharacterPositionRow();
                 characterPositionRow.set(characterPositionRowIndex + 1 + "");
@@ -131,6 +131,10 @@ public class MyViewModel extends Observable implements Observer {
 
     public void characterMouseDrag(int row_pos, int col_pos) {
         model.characterMouseDrag(row_pos, col_pos);
+    }
+
+    public void setSong(String url) {
+        model.music(url);
     }
 
     public void mute (int i) {

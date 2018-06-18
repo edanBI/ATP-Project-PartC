@@ -1,10 +1,6 @@
 .root{
-    -fx-background-image: url(../../../../resources/Images/jerus.jpg) 75%;
+    -fx-background-image: url("../../jerus.jpg");
     -fx-background-size: cover;
-}
-.mazeDisplayer
-{
-    -fx-background-image: url(../../../../resources/Images/sky.jpg);
 }
 
 .button
