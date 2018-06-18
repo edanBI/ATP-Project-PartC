@@ -66,12 +66,8 @@ public class MazeDisplayer extends Canvas {
 
     public void redraw() {
         if (maze != null) {
-            /*double cellHeight = getWidth() / maze[0].length;
-            double cellWidth = getHeight() / maze.length;*/
             double cellWidth = getWidth() / maze[0].length;
             double cellHeight = getHeight() / maze.length;
-            /*cellHeight-=32;
-            cellWidth-=178;*/
             try {
                 Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
                 Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
@@ -81,8 +77,6 @@ public class MazeDisplayer extends Canvas {
 
                 GraphicsContext gc = getGraphicsContext2D();
                 gc.drawImage(mazeImage, 0, 0, getWidth(), getHeight());
-                //Draw Maze
-                //gc.setFill(Color.TRANSPARENT);
 
                 for (int i = 0; i < maze.length; i++) { // i == row - y axis
                     for (int j = 0; j < maze[i].length; j++) { // j == col - x axis

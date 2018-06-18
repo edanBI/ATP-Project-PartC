@@ -5,24 +5,19 @@ Observe View Model
 import ViewModel.MyViewModel;
 import algorithms.mazeGenerators.Maze;
 import algorithms.search.AState;
-import algorithms.search.MazeState;
 import algorithms.search.Solution;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.stage.FileChooser;
@@ -30,9 +25,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.URL;
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class MyViewController implements Observer, IView{
@@ -153,7 +145,6 @@ public class MyViewController implements Observer, IView{
             }
         }
     }
-
     @Override
     public void displayMaze(Maze maze) {
         mazeDisplayer.setMaze(maze);
@@ -171,20 +162,13 @@ public class MyViewController implements Observer, IView{
         try {
             int row_in = Integer.valueOf(txtfld_rowsNum.getText());
             int col_in = Integer.valueOf(txtfld_columnsNum.getText());
+            if (row_in < 4) row_in = 4;
+            if (col_in < 4) col_in = 4;
+
             btn_generateMaze.setDisable(true);
-            if (row_in < 4)
-                row_in = 4;
-            if (col_in < 4)
-                col_in = 4;
-            //mazeDisplayer.setHeight((double) (newSceneHeight.intValue() - 49));
-            /*mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
-            mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);*/
             mazeDisplayer.setWidth(mazeDisplayer.getScene().getWidth() - 195);
             mazeDisplayer.setHeight(mazeDisplayer.getScene().getHeight() - 49);
-            update(view_model, new Object());
-
             btn_mute.setDisable(false);
-
             view_model.generateMaze(row_in, col_in);
         }
         catch (NumberFormatException e) {
@@ -261,30 +245,8 @@ public class MyViewController implements Observer, IView{
     }
 
     public void KeyPressed(KeyEvent keyEvent) {
-        if (view_model.moveCharacter(keyEvent.getCode())){
-            //EndGameDialog.show();
-        }
+        view_model.moveCharacter(keyEvent.getCode());
         keyEvent.consume();
-    }
-
-    public StringProperty characterPositionRow = new SimpleStringProperty();
-
-    public StringProperty characterPositionColumn = new SimpleStringProperty();
-
-    public String getCharacterPositionRow() {
-        return characterPositionRow.get();
-    }
-
-    public StringProperty characterPositionRowProperty() {
-        return characterPositionRow;
-    }
-
-    public String getCharacterPositionColumn() {
-        return characterPositionColumn.get();
-    }
-
-    public StringProperty characterPositionColumnProperty() {
-        return characterPositionColumn;
     }
 
     public void setResizeEvent(Scene scene) {
@@ -295,7 +257,6 @@ public class MyViewController implements Observer, IView{
                     mazeDisplayer.setWidth((double) newSceneWidth.intValue() - 195);
                     if (view_model.getSolution() != null)
                         mazeDisplayer.setWantSolution(true);
-                    //mazeDisplayer.redraw();
                 }
             }
         });
@@ -307,7 +268,6 @@ public class MyViewController implements Observer, IView{
                     mazeDisplayer.setHeight((double) (newSceneHeight.intValue() - 49));
                     if (view_model.getSolution() != null)
                         mazeDisplayer.setWantSolution(true);
-                    //mazeDisplayer.redraw();
                 }
             }
         });
@@ -358,7 +318,7 @@ public class MyViewController implements Observer, IView{
         FileChooser dialog = new FileChooser();
         FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("maze file (*.maze)", "*.maze");
         dialog.setTitle("Save Maze");
-        dialog.setInitialFileName("Maze ["+num_rows+","+num_cols+"]: " + LocalDateTime.now(Clock.systemDefaultZone())+".maze");
+        dialog.setInitialFileName("Maze "+num_rows+"x"+num_cols + ".maze");
         dialog.getExtensionFilters().add(filter);
         File file = dialog.showSaveDialog(new Stage());
         if (file != null) {
@@ -373,6 +333,9 @@ public class MyViewController implements Observer, IView{
 
     public void loadMaze() {
         try {
+            mazeDisplayer.setWidth(mazeDisplayer.getScene().getWidth() - 195);
+            mazeDisplayer.setHeight(mazeDisplayer.getScene().getHeight() - 49);
+            btn_mute.setDisable(false);
             FileChooser dialog = new FileChooser();
             FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("All maze files (*.maze)", "*.maze");
             dialog.setTitle("Load Maze");
@@ -426,5 +389,20 @@ public class MyViewController implements Observer, IView{
     public void mute() {
         view_model.mute(sound);
         sound++;
+    }
+
+    public StringProperty characterPositionRow = new SimpleStringProperty();
+    public StringProperty characterPositionColumn = new SimpleStringProperty();
+    public StringProperty characterPositionRowProperty() {
+        return characterPositionRow;
+    }
+    public StringProperty characterPositionColumnProperty() {
+        return characterPositionColumn;
+    }
+    public String getCharacterPositionRow() {
+        return characterPositionRow.get();
+    }
+    public String getCharacterPositionColumn() {
+        return characterPositionColumn.get();
     }
 }
