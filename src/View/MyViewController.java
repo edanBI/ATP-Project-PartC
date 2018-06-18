@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -40,16 +41,19 @@ public class MyViewController implements Observer, IView, Initializable{
     private boolean prop_update;
     private Properties prop;
     private int sound;
-    private int curr_width, curr_height;
 
     @FXML
     public MazeDisplayer mazeDisplayer;
     public javafx.scene.control.TextField txtfld_rowsNum;
     public javafx.scene.control.TextField txtfld_columnsNum;
-    public javafx.scene.control.Label lbl_character_pos;
+    public javafx.scene.control.Label lbl_rowsNum;
+    public javafx.scene.control.Label lbl_columnsNum;
+    public javafx.scene.control.Label lbl_goalRowsNum;
+    public javafx.scene.control.Label lbl_goalColumnsNum;
     public javafx.scene.control.Button btn_generateMaze;
     public javafx.scene.control.Button btn_solveMaze;
     public javafx.scene.control.Button btn_hideSolution;
+    public javafx.scene.control.Button btn_mute;
     public javafx.scene.control.RadioMenuItem rmi_bfs;
     public javafx.scene.control.RadioMenuItem rmi_dfs;
     public javafx.scene.control.RadioMenuItem rmi_best;
@@ -62,8 +66,6 @@ public class MyViewController implements Observer, IView, Initializable{
         prop = new Properties();
         OutputStream _out;
         InputStream _in;
-        curr_height = 0;
-        curr_width = 0;
         try {
             _in = new FileInputStream("resources/config.properties");
             prop.load(_in);
@@ -90,9 +92,10 @@ public class MyViewController implements Observer, IView, Initializable{
      * binds the text label in the main menu to the my_viewModel in the background
      * */
     private void bindProperties(MyViewModel viewModel) {
-        /*lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow); // display row pos
-        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn); // display col pos*/
-        lbl_character_pos.textProperty().bind(viewModel.character_Position);
+        lbl_rowsNum.textProperty().bind(viewModel.characterPositionRow); // display row pos
+        lbl_columnsNum.textProperty().bind(viewModel.characterPositionColumn); // display col pos
+        lbl_goalRowsNum.textProperty().bind(viewModel.goalPositionRow);
+        lbl_goalColumnsNum.textProperty().bind(viewModel.goalPositionColumn);
     }
 
     public void update(Observable o, Object arg) {
@@ -123,51 +126,49 @@ public class MyViewController implements Observer, IView, Initializable{
                         mazeDisplayer.redraw();
                     }
                 }
+
+                if (view_model.getGoalPositionRowIndex()==positionRow && view_model.getGoalPositionColumnIndex()==positionColumn){
+                    EndGameDialog.show();
+                }
             }
         }
     }
+
     @Override
     public void displayMaze(Maze maze) {
         mazeDisplayer.setMaze(maze);
         int character_pos_row = view_model.getCharacterPositionRow();
         int character_pos_col = view_model.getCharacterPositionColumn();
-        //int goalPositionRow = view_model.getGoalPositionRowIndex();
-        //int goalPositionColumn = view_model.getGoalPositionColumnIndex();
         mazeDisplayer.setCharacterPosition(character_pos_row, character_pos_col); // display character on screen
-        //mazeDisplayer.setGoalPosition(goalPositionRow, goalPositionColumn);
         this.characterPositionRow.set(character_pos_row + "");
         this.characterPositionColumn.set(character_pos_col + "");
-        //my_viewModel.btn_solveMaze();
-        //mazeDisplayer.setSolution(sol);
-        mazeDisplayer.requestFocus();
-        btn_solveMaze.setDisable(false);
-    }
 
-    private void displayMaze(Maze maze, double width, double height) {
-        mazeDisplayer.setScaleX(width*0.1);
-        mazeDisplayer.setScaleY((height*0.1));
-        /*mazeDisplayer.setWidth(width);
-        mazeDisplayer.setHeight(height);*/
-        mazeDisplayer.setMaze(maze);
-        int character_pos_row = view_model.getCharacterPositionRow();
-        int character_pos_col = view_model.getCharacterPositionColumn();
-        mazeDisplayer.setCharacterPosition(character_pos_row, character_pos_col); // display character on screen
-        this.characterPositionRow.set(character_pos_row + "");
-        this.characterPositionColumn.set(character_pos_col + "");
         mazeDisplayer.requestFocus();
         btn_solveMaze.setDisable(false);
     }
 
     public void generateMaze() {
-        int height = Integer.valueOf(txtfld_rowsNum.getText());
-        int width = Integer.valueOf(txtfld_columnsNum.getText());
-        btn_generateMaze.setDisable(true);
+        int height, width;
+        try {
+            height = Integer.valueOf(txtfld_rowsNum.getText());
+            width = Integer.valueOf(txtfld_columnsNum.getText());
+            btn_generateMaze.setDisable(true);
 
-        mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
-        mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);
-        update(view_model, new Object());
+            mazeDisplayer.setWidth(txtfld_rowsNum.getScene().getWidth() - 190);
+            mazeDisplayer.setHeight(txtfld_rowsNum.getScene().getHeight() - 60);
+            update(view_model, new Object());
 
-        view_model.generateMaze(width, height);
+            btn_mute.setDisable(false);
+
+            view_model.generateMaze(width, height);
+        }
+        catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Wrong maze size input. " +
+                    "Try again.");
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.showAndWait();
+        }
     }
 
     public void solveMaze(ActionEvent actionEvent) {
@@ -226,7 +227,6 @@ public class MyViewController implements Observer, IView, Initializable{
             if (scrollEvent.getDeltaY() > 0) { //for zooming in
                 mazeDisplayer.setScaleX(mazeDisplayer.getScaleX()*1.01);
                 mazeDisplayer.setScaleY(mazeDisplayer.getScaleY()*1.01);
-
             }
             else { //for zooming out
                 mazeDisplayer.setScaleX(mazeDisplayer.getScaleX()/1.01);
@@ -237,13 +237,9 @@ public class MyViewController implements Observer, IView, Initializable{
 
     public void KeyPressed(KeyEvent keyEvent) {
         if (view_model.moveCharacter(keyEvent.getCode())){
-            EndGameDialog.show();
+            //EndGameDialog.show();
         }
         keyEvent.consume();
-    }
-
-    public void goal_reached(){
-
     }
 
     public StringProperty characterPositionRow = new SimpleStringProperty();
@@ -400,17 +396,9 @@ public class MyViewController implements Observer, IView, Initializable{
         }
     }
 
-    /**
-     * Called to initialize a controller after its root element has been
-     * completely processed.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or
-     *                  <tt>null</tt> if the location is not known.
-     * @param resources The resources used to localize the root object, or <tt>null</tt> if
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        //Image wallpaper = new Image("resources/Images/grass.jpg");
     }
 
     public void mute() {

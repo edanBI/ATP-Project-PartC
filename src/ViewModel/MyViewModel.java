@@ -27,11 +27,11 @@ public class MyViewModel extends Observable implements Observer {
     private int goalPositionColumnIndex;
     //private Position position;
     private Solution sol;
-    public StringProperty characterPositionRow = new SimpleStringProperty("1"); //For Binding
-    public StringProperty characterPositionColumn = new SimpleStringProperty("1"); //For Binding
-    public StringProperty goalPositionRow = new SimpleStringProperty("1");
-    public StringProperty goalPositionColumn = new SimpleStringProperty("1");
-    public StringProperty character_Position = new SimpleStringProperty(" ");
+    public StringProperty characterPositionRow = new SimpleStringProperty(""); //For Binding
+    public StringProperty characterPositionColumn = new SimpleStringProperty(""); //For Binding
+    public StringProperty goalPositionRow = new SimpleStringProperty("");
+    public StringProperty goalPositionColumn = new SimpleStringProperty("");
+    public StringProperty character_Position = new SimpleStringProperty("");
 
     public MyViewModel(IModel model){
         this.model = model;
@@ -45,13 +45,13 @@ public class MyViewModel extends Observable implements Observer {
                 model.music();
 
                 characterPositionRowIndex = model.getCharacterPositionRow();
-                characterPositionRow.set(characterPositionRowIndex + "");
+                characterPositionRow.set(characterPositionRowIndex + 1 + "");
                 characterPositionColumnIndex = model.getCharacterPositionColumn();
-                characterPositionColumn.set(characterPositionColumnIndex + "");
+                characterPositionColumn.set(characterPositionColumnIndex + 1 + "");
                 goalPositionRowIndex = model.getGoalPositionRow();
-                goalPositionRow.set(goalPositionRowIndex + "");
+                goalPositionRow.set(goalPositionRowIndex + 1 + "");
                 goalPositionColumnIndex = model.getGoalPositionColumn();
-                goalPositionColumn.set(goalPositionColumnIndex + "");
+                goalPositionColumn.set(goalPositionColumnIndex + 1 + "");
                 character_Position.set(model.getMaze().getStartPosition().toString());
                 setChanged();
                 notifyObservers("maze generated");
@@ -63,9 +63,9 @@ public class MyViewModel extends Observable implements Observer {
             }
             if (arg.equals("moved")) {
                 characterPositionRowIndex = model.getCharacterPositionRow();
-                characterPositionRow.set(characterPositionRowIndex + "");
+                characterPositionRow.set(characterPositionRowIndex + 1 + "");
                 characterPositionColumnIndex = model.getCharacterPositionColumn();
-                characterPositionColumn.set(characterPositionColumnIndex + "");
+                characterPositionColumn.set(characterPositionColumnIndex + 1 + "");
                 character_Position.set(getCharacter_Position().toString());
                 setChanged();
                 notifyObservers("player moved");

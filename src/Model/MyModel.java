@@ -182,7 +182,6 @@ public class MyModel extends Observable implements IModel {
                 if (legal_move(characterPositionRow-1, characterPositionColumn))
                     characterPositionRow--;
                 break;
-            //////////////////////////////////////////////////////////////////////////////
             case NUMPAD1:
                 if ( (legal_move(characterPositionRow+1, characterPositionColumn) ||
                         legal_move(characterPositionRow, characterPositionColumn-1))

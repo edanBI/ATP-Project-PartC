@@ -10,13 +10,16 @@
 <?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane onKeyPressed="#KeyPressed" onMouseDragged="#mouseDrag" onScroll="#mouseScroll" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MyViewController">
@@ -35,7 +38,6 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <Label text="Maze rows:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                     <Label text="Maze columns:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -44,12 +46,168 @@
                     <Button fx:id="btn_generateMaze" onAction="#generateMaze" prefHeight="25.0" prefWidth="167.0" text="Generate Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                     <Button fx:id="btn_solveMaze" disable="true" onAction="#solveMaze" prefHeight="25.0" prefWidth="167.0" text="Solve Maze" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                <Button fx:id="btn_hideSolution" disable="true" layoutX="10.0" layoutY="100.0" onAction="#hideSolution" prefHeight="25.0" prefWidth="167.0" text="Hide Solution" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-                    <Label prefHeight="16.0" prefWidth="114.0" text="Miri's Position:" GridPane.rowIndex="5">
-                        <font>
-                            <Font name="Arial Bold" size="14.0" />
-                        </font></Label>
-                    <Label fx:id="lbl_character_pos" prefHeight="21.0" prefWidth="102.0" textAlignment="RIGHT" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />
+               <Button fx:id="btn_mute" disable="true" layoutX="10.0" layoutY="113.0" onAction="#mute" prefHeight="25.0" prefWidth="167.0" text="Mute" GridPane.columnSpan="2" GridPane.rowIndex="5" />
                 </GridPane>
+            <GridPane style="-fx-background-color: linear-gradient(#2A5058, #61a2b1); -fx-background-radius: 10;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                       <Label prefHeight="21.0" prefWidth="102.0" style="-fx-border-radius: 25px;" text="    Row :" textAlignment="RIGHT" GridPane.rowIndex="1">
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <textFill>
+                        <RadialGradient centerX="0.5568181818181818" centerY="0.2524271844660194" radius="0.5">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#00ff0b" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_character_pos1" prefHeight="21.0" prefWidth="102.0" text=" Column :" textAlignment="RIGHT" GridPane.rowIndex="2">
+                     <textFill>
+                        <RadialGradient centerX="0.5511363636363636" centerY="0.558252427184466" focusAngle="-69.23" focusDistance="0.07317073170731692" radius="0.3414634146341463">
+                           <stops>
+                              <Stop color="#5e9fe1" />
+                              <Stop color="#62ff00" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                       <Label prefHeight="16.0" prefWidth="162.0" style="-fx-border-radius: 10;" text="     Miri's Position" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" GridPane.columnSpan="2">
+                           <font>
+                               <Font name="Arial Bold" size="17.0" />
+                           </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#f8f7f8" />
+                              <Stop color="#55a7ff" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="lbl_rowsNum" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#dfff00" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font></Label>
+                  <Label fx:id="lbl_columnsNum" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#dfff00" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font></Label>
+               </children>
+            </GridPane>
+            <GridPane layoutX="15.0" layoutY="200.0" style="-fx-background-color: linear-gradient(#2A5058, #61a2b1); -fx-background-radius: 10;">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label prefHeight="21.0" prefWidth="102.0" style="-fx-border-radius: 25px;" text="    Row :" textAlignment="RIGHT" GridPane.rowIndex="1">
+                     <effect>
+                        <Glow />
+                     </effect>
+                     <textFill>
+                        <RadialGradient centerX="0.5568181818181818" centerY="0.2524271844660194" radius="0.5">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#00ff0b" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_character_pos11" prefHeight="21.0" prefWidth="102.0" text=" Column :" textAlignment="RIGHT" GridPane.rowIndex="2">
+                     <textFill>
+                        <RadialGradient centerX="0.5511363636363636" centerY="0.558252427184466" focusAngle="-69.23" focusDistance="0.07317073170731692" radius="0.3414634146341463">
+                           <stops>
+                              <Stop color="#5e9fe1" />
+                              <Stop color="#62ff00" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="16.0" prefWidth="162.0" style="-fx-border-radius: 10;" text="   Messi's Position" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" wrapText="true" GridPane.columnSpan="2">
+                     <font>
+                        <Font name="Arial Bold" size="17.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#f8f7f8" />
+                              <Stop color="#e86060" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label fx:id="lbl_goalRowsNum" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#dfff00" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_goalColumnsNum" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#1978d7" />
+                              <Stop color="#dfff00" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -59,9 +217,8 @@
     <center>
         <Pane BorderPane.alignment="CENTER">
             <children>
-                <MazeDisplayer fx:id="mazeDisplayer" height="600.0" imageFileGoal="resources/Images/small_messi_goal.png" imageFileNameCharacter="resources/Images/miri.png" imageFileNameWall="resources/Images/wail_wall.jpg" style="-fx-border: black;" width="600.0">
+            <MazeDisplayer fx:id="mazeDisplayer" height="600.0" imageFileBall="resources/Images/ball.png" imageFileGoal="resources/Images/small_messi_goal.png" imageFileMaze="resources/Images/grass.jpg" imageFileNameCharacter="resources/Images/miri.png" imageFileNameWall="resources/Images/brickWall.jpg" style="-fx-border: black;" width="600.0">
                     <effect>
-                        <SepiaTone />
                     </effect></MazeDisplayer>
             </children>
             <padding>
@@ -105,22 +262,17 @@
                      </items>
                   </Menu>
                </items></Menu>
-            <Menu mnemonicParsing="false" text="Exit">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" onAction="#mute" text="Mute">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Mute" />
-                </items>
-            </Menu>
           <Menu mnemonicParsing="false" text="Information">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#About" text="About" />
                   <MenuItem mnemonicParsing="false" onAction="#Help" text="Help" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Exit">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

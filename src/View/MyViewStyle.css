@@ -1,17 +1,16 @@
 .root{
-    -fx-background-image: url(http://www.elgransrj.com/media/wysiwyg/toy-story-background-slide-4-savedforweb.png) 25%;
+    -fx-background-image: url(../../../../resources/Images/jerus.jpg) 75%;
     -fx-background-size: cover;
 }
-
-.MazeDisplayer{
-    -fx-border-color: black;
+.mazeDisplayer
+{
+    -fx-background-image: url(../../../../resources/Images/sky.jpg);
 }
 
 .button
 {
     -fx-text-fill: white;
     -fx-background-radius: 8;
-    -fx-border-color: yellow;
     -fx-font-family: "Arial Narrow";
     -fx-font-size: 12;
     -fx-font-weight: bold;
@@ -19,7 +18,19 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
-Button:hover
+.button:pressed
+{
+    -fx-effect: innershadow(gaussian, black, 10, 0.001, 0,0);
+    -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+    -fx-padding: 0.333333em 0.666667em 0.333333em 0.666667em; /* 4 8 4 8 */
+    -fx-text-fill: -fx-text-base-color;
+    -fx-alignment: CENTER;
+    -fx-content-display: LEFT;
+}
+
+.button:hover
 {
     -fx-background-color: -fx-shadow-highlight-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
@@ -29,3 +40,5 @@ Button:hover
     -fx-alignment: CENTER;
     -fx-content-display: LEFT;
 }
+
+.gridPane

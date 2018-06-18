@@ -6,11 +6,13 @@
       <change beforePath="$PROJECT_DIR$/Resources/Images/character1.jpg" afterPath="$PROJECT_DIR$/Resources/Images/character1.jpg" />
       <change beforePath="$PROJECT_DIR$/Resources/config.properties" afterPath="$PROJECT_DIR$/Resources/config.properties" />
       <change beforePath="$PROJECT_DIR$/ServerStrategyGenerateMaze_CompressedMaze.maze" afterPath="$PROJECT_DIR$/ServerStrategyGenerateMaze_CompressedMaze.maze" />
-      <change beforePath="$PROJECT_DIR$/src/Model/IModel.java" afterPath="$PROJECT_DIR$/src/Model/IModel.java" />
+      <change beforePath="$PROJECT_DIR$/resources/Images/small_messi_goal.png" afterPath="$PROJECT_DIR$/resources/Images/small_messi_goal.png" />
       <change beforePath="$PROJECT_DIR$/src/Model/MyModel.java" afterPath="$PROJECT_DIR$/src/Model/MyModel.java" />
+      <change beforePath="$PROJECT_DIR$/src/View/Main.java" afterPath="$PROJECT_DIR$/src/View/Main.java" />
       <change beforePath="$PROJECT_DIR$/src/View/MazeDisplayer.java" afterPath="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
       <change beforePath="$PROJECT_DIR$/src/View/MyView.fxml" afterPath="$PROJECT_DIR$/src/View/MyView.fxml" />
       <change beforePath="$PROJECT_DIR$/src/View/MyViewController.java" afterPath="$PROJECT_DIR$/src/View/MyViewController.java" />
+      <change beforePath="$PROJECT_DIR$/src/View/MyViewStyle.css" afterPath="$PROJECT_DIR$/src/View/MyViewStyle.css" />
       <change beforePath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" afterPath="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -24,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ATP_Project_PartC$Main.coverage" NAME="Main Coverage Results" MODIFIED="1529257551849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ATP_Project_PartC$Main.coverage" NAME="Main Coverage Results" MODIFIED="1529304585346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>View.*</FILTER>
     </SUITE>
   </component>
@@ -77,72 +79,39 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/View/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="173">
+              <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyViewModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
+      <file leaf-file-name="MyViewController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1617">
-              <caret line="132" column="49" lean-forward="false" selection-start-line="132" selection-start-column="49" selection-end-line="132" selection-end-column="49" />
+            <state relative-caret-position="-1095">
+              <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#update#0;class#MyViewModel#0" expanded="false" />
-                <element signature="e#3043#3044#0" expanded="true" />
-                <element signature="e#3081#3082#0" expanded="true" />
-                <element signature="e#3112#3113#0" expanded="true" />
-                <element signature="e#3145#3146#0" expanded="true" />
-                <element signature="e#3382#3383#0" expanded="true" />
-                <element signature="e#3424#3425#0" expanded="true" />
-                <element signature="method#loadMaze#0;class#MyViewModel#0" expanded="false" />
-                <element signature="e#4350#4351#0" expanded="true" />
-                <element signature="e#4408#4409#0" expanded="true" />
-                <element signature="e#4440#4441#0" expanded="true" />
-                <element signature="e#4469#4470#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/IModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="26" column="19" lean-forward="false" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MazeDisplayer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2835">
-              <caret line="172" column="5" lean-forward="false" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1440#1441#0" expanded="true" />
-                <element signature="e#1467#1468#0" expanded="true" />
-                <element signature="e#5567#5568#0" expanded="true" />
-                <element signature="e#5613#5614#0" expanded="true" />
-                <element signature="e#5679#5680#0" expanded="true" />
-                <element signature="e#5740#5741#0" expanded="true" />
-                <element signature="e#5798#5799#0" expanded="true" />
-                <element signature="e#5851#5852#0" expanded="true" />
-                <element signature="e#5891#5892#0" expanded="true" />
-                <element signature="e#5933#5934#0" expanded="true" />
-                <element signature="e#5982#5983#0" expanded="true" />
-                <element signature="e#6033#6034#0" expanded="true" />
-                <element signature="e#6237#6238#0" expanded="true" />
-                <element signature="e#6285#6286#0" expanded="true" />
-                <element signature="e#6329#6330#0" expanded="true" />
-                <element signature="e#6372#6373#0" expanded="true" />
-                <element signature="e#6418#6419#0" expanded="true" />
-                <element signature="e#6464#6465#0" expanded="true" />
+                <element signature="method#solveMaze#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#hideSolution#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#showFinishedGameAlert#0;class#MyViewController#0" expanded="false" />
+                <element signature="e#9362#9363#0" expanded="true" />
+                <element signature="e#9411#9412#0" expanded="true" />
+                <element signature="e#9471#9472#0" expanded="true" />
+                <element signature="e#9514#9515#0" expanded="true" />
+                <element signature="e#9564#9565#0" expanded="true" />
+                <element signature="e#9616#9617#0" expanded="true" />
+                <element signature="e#9679#9680#0" expanded="true" />
+                <element signature="e#9725#9726#0" expanded="true" />
+                <element signature="method#setResizeEvent#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#properties#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#saveMaze#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#loadMaze#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#About#0;class#MyViewController#0" expanded="false" />
+                <element signature="method#Help#0;class#MyViewController#0" expanded="false" />
+                <element signature="e#14592#14642#0" expanded="false" />
+                <element signature="method#exit#0;class#MyViewController#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -151,8 +120,8 @@
       <file leaf-file-name="MyView.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            <state relative-caret-position="402">
+              <caret line="61" column="160" lean-forward="false" selection-start-line="61" selection-start-column="160" selection-end-line="61" selection-end-column="160" />
               <folding />
             </state>
           </provider>
@@ -161,62 +130,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
+      <file leaf-file-name="MyViewModel.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
-              <caret line="257" column="5" lean-forward="true" selection-start-line="257" selection-start-column="5" selection-end-line="257" selection-end-column="5" />
+            <state relative-caret-position="1113">
+              <caret line="67" column="78" lean-forward="false" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
               <folding>
-                <element signature="e#6762#6763#0" expanded="true" />
-                <element signature="e#6791#6792#0" expanded="true" />
-                <element signature="e#6842#6843#0" expanded="true" />
-                <element signature="e#6877#6878#0" expanded="true" />
-                <element signature="method#legal_move#0;class#MyModel#0" expanded="false" />
-                <element signature="e#11060#11061#0" expanded="true" />
-                <element signature="e#11104#11105#0" expanded="true" />
-                <element signature="method#mute#0;class#MyModel#0" expanded="false" />
-                <element signature="method#music#0;class#MyModel#0" expanded="false" />
-                <element signature="e#12442#12443#0" expanded="true" />
-                <element signature="e#12467#12468#0" expanded="true" />
+                <element signature="method#loadMaze#0;class#MyViewModel#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyViewController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
+      <file leaf-file-name="About.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/View/About.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="224" column="18" lean-forward="false" selection-start-line="224" selection-start-column="18" selection-end-line="224" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#setViewModel#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#bindProperties#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#update#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#generateMaze#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#solveMaze#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#hideSolution#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#showAlert#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#showFinishedGameAlert#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#KeyPressed#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#goal_reached#0;class#MyViewController#0" expanded="false" />
-                <element signature="e#9632#9633#0" expanded="true" />
-                <element signature="e#9681#9682#0" expanded="true" />
-                <element signature="e#9741#9742#0" expanded="true" />
-                <element signature="e#9784#9785#0" expanded="true" />
-                <element signature="e#9834#9835#0" expanded="true" />
-                <element signature="e#9886#9887#0" expanded="true" />
-                <element signature="e#9949#9950#0" expanded="true" />
-                <element signature="e#9995#9996#0" expanded="true" />
-                <element signature="method#setResizeEvent#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#properties#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#saveMaze#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#loadMaze#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#About#0;class#MyViewController#0" expanded="false" />
-                <element signature="method#Help#0;class#MyViewController#0" expanded="false" />
-                <element signature="e#14862#14912#0" expanded="false" />
-                <element signature="method#exit#0;class#MyViewController#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="84">
+              <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -257,6 +188,8 @@
       <find>exit</find>
       <find>mazeDisplayer</find>
       <find>178</find>
+      <find>wall</find>
+      <find>yellow</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -284,18 +217,18 @@
         <option value="$PROJECT_DIR$/src/View/Controller.java" />
         <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/View/EndGameDialog.java" />
-        <option value="$PROJECT_DIR$/src/View/MyViewStyle.css" />
         <option value="$PROJECT_DIR$/src/View/About.java" />
         <option value="$PROJECT_DIR$/src/View/Help.fxml" />
         <option value="$PROJECT_DIR$/src/View/About.fxml" />
         <option value="$PROJECT_DIR$/src/View/IView.java" />
-        <option value="$PROJECT_DIR$/src/View/Main.java" />
         <option value="$PROJECT_DIR$/src/Model/IModel.java" />
-        <option value="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" />
         <option value="$PROJECT_DIR$/src/Model/MyModel.java" />
+        <option value="$PROJECT_DIR$/src/View/Main.java" />
         <option value="$PROJECT_DIR$/src/View/MazeDisplayer.java" />
-        <option value="$PROJECT_DIR$/src/View/MyView.fxml" />
+        <option value="$PROJECT_DIR$/src/View/MyViewStyle.css" />
         <option value="$PROJECT_DIR$/src/View/MyViewController.java" />
+        <option value="$PROJECT_DIR$/src/View/MyView.fxml" />
+        <option value="$PROJECT_DIR$/src/ViewModel/MyViewModel.java" />
       </list>
     </option>
   </component>
@@ -314,7 +247,7 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -327,7 +260,70 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ATP-Project-PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP-Project-PartC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP-Project-PartC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ATP-Project-PartC" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="View" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+              <item name="Model" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+              <item name="View" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+              <item name="ViewModel" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
+            </path>
+            <path>
+              <item name="ATP-Project-PartC" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ATP-Project-PartC" type="616d4139:PackageViewModuleNode" />
+              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
+              <item name="Server" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -542,7 +538,9 @@
       <workItem from="1529155172382" duration="2316000" />
       <workItem from="1529172360246" duration="10985000" />
       <workItem from="1529183578374" duration="26224000" />
-      <workItem from="1529255008049" duration="2847000" />
+      <workItem from="1529255008049" duration="4178000" />
+      <workItem from="1529261726886" duration="7736000" />
+      <workItem from="1529303965534" duration="9150000" />
     </task>
     <task id="LOCAL-00001" summary="first structure build">
       <created>1528709483019</created>
@@ -705,11 +703,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529230294291</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="zooming in and out">
+      <created>1529257909704</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1529257909704</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155503000" />
+    <option name="totallyTimeSpent" value="173720000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -733,19 +738,19 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2629834" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36644593" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5022075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50110376" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1609375" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14114584" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4624724" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46196026" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -848,14 +853,25 @@
     <MESSAGE value="Cleanup commit - saturday evening" />
     <MESSAGE value="Properties completed.&#10;Now update solution while miri moves not finished" />
     <MESSAGE value="Properties completed.&#10;solution moves with miri.&#10;music working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Properties completed.&#10;solution moves with miri.&#10;music working." />
+    <MESSAGE value="zooming in and out" />
+    <option name="LAST_COMMIT_MESSAGE" value="zooming in and out" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/View/MazeDisplayer.java</url>
+          <line>50</line>
+          <properties class="View.MazeDisplayer" method="setSolution">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -864,20 +880,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Runnable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1033">
-          <caret line="67" column="25" lean-forward="false" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/jre/lib/rt.jar!/sun/launcher/LauncherHelper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/com/sun/javafx/application/LauncherImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -1083,13 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/scene/image/Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="1117" column="0" lean-forward="false" selection-start-line="1117" selection-start-column="0" selection-end-line="1117" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/com/sun/glass/ui/win/WinApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -1115,13 +1110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="931">
           <caret line="80" column="29" lean-forward="false" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MyViewStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1229,13 +1217,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/About.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/View/About.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1287,7 +1268,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="747" column="0" lean-forward="false" selection-start-line="747" selection-start-column="0" selection-end-line="747" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1320,112 +1300,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2835">
-          <caret line="172" column="5" lean-forward="false" selection-start-line="172" selection-start-column="5" selection-end-line="172" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1440#1441#0" expanded="true" />
-            <element signature="e#1467#1468#0" expanded="true" />
-            <element signature="e#5567#5568#0" expanded="true" />
-            <element signature="e#5613#5614#0" expanded="true" />
-            <element signature="e#5679#5680#0" expanded="true" />
-            <element signature="e#5740#5741#0" expanded="true" />
-            <element signature="e#5798#5799#0" expanded="true" />
-            <element signature="e#5851#5852#0" expanded="true" />
-            <element signature="e#5891#5892#0" expanded="true" />
-            <element signature="e#5933#5934#0" expanded="true" />
-            <element signature="e#5982#5983#0" expanded="true" />
-            <element signature="e#6033#6034#0" expanded="true" />
-            <element signature="e#6237#6238#0" expanded="true" />
-            <element signature="e#6285#6286#0" expanded="true" />
-            <element signature="e#6329#6330#0" expanded="true" />
-            <element signature="e#6372#6373#0" expanded="true" />
-            <element signature="e#6418#6419#0" expanded="true" />
-            <element signature="e#6464#6465#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/IModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="26" column="19" lean-forward="false" selection-start-line="26" selection-start-column="19" selection-end-line="26" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1617">
-          <caret line="132" column="49" lean-forward="false" selection-start-line="132" selection-start-column="49" selection-end-line="132" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#update#0;class#MyViewModel#0" expanded="false" />
-            <element signature="e#3043#3044#0" expanded="true" />
-            <element signature="e#3081#3082#0" expanded="true" />
-            <element signature="e#3112#3113#0" expanded="true" />
-            <element signature="e#3145#3146#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3424#3425#0" expanded="true" />
-            <element signature="method#loadMaze#0;class#MyViewModel#0" expanded="false" />
-            <element signature="e#4350#4351#0" expanded="true" />
-            <element signature="e#4408#4409#0" expanded="true" />
-            <element signature="e#4440#4441#0" expanded="true" />
-            <element signature="e#4469#4470#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="257" column="5" lean-forward="true" selection-start-line="257" selection-start-column="5" selection-end-line="257" selection-end-column="5" />
-          <folding>
-            <element signature="e#6762#6763#0" expanded="true" />
-            <element signature="e#6791#6792#0" expanded="true" />
-            <element signature="e#6842#6843#0" expanded="true" />
-            <element signature="e#6877#6878#0" expanded="true" />
-            <element signature="method#legal_move#0;class#MyModel#0" expanded="false" />
-            <element signature="e#11060#11061#0" expanded="true" />
-            <element signature="e#11104#11105#0" expanded="true" />
-            <element signature="method#mute#0;class#MyModel#0" expanded="false" />
-            <element signature="method#music#0;class#MyModel#0" expanded="false" />
-            <element signature="e#12442#12443#0" expanded="true" />
-            <element signature="e#12467#12468#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/scene/input/GestureEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
           <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
-          <folding>
-            <element signature="e#6874#6875#0" expanded="true" />
-            <element signature="e#6898#6899#0" expanded="true" />
-            <element signature="e#7246#7247#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1434,50 +1312,153 @@
         <state relative-caret-position="1870">
           <caret line="5490" column="38" lean-forward="false" selection-start-line="5490" selection-start-column="38" selection-end-line="5490" selection-end-column="38" />
           <folding>
-            <element signature="e#100895#100896#0" expanded="true" />
-            <element signature="e#100955#100956#0" expanded="true" />
-            <element signature="e#103797#103798#0" expanded="true" />
-            <element signature="e#103857#103858#0" expanded="true" />
-            <element signature="e#224822#224823#0" expanded="true" />
-            <element signature="e#224869#224870#0" expanded="true" />
-            <element signature="e#225741#225742#0" expanded="true" />
-            <element signature="e#225808#225809#0" expanded="true" />
+            <element signature="e#100895#100896#0" expanded="false" />
+            <element signature="e#100955#100956#0" expanded="false" />
+            <element signature="e#103797#103798#0" expanded="false" />
+            <element signature="e#103857#103858#0" expanded="false" />
+            <element signature="e#224822#224823#0" expanded="false" />
+            <element signature="e#224869#224870#0" expanded="false" />
+            <element signature="e#225741#225742#0" expanded="false" />
+            <element signature="e#225808#225809#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/MyModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3200">
+          <caret line="184" column="25" lean-forward="false" selection-start-line="184" selection-start-column="25" selection-end-line="184" selection-end-column="25" />
+          <folding>
+            <element signature="method#generateMaze#0;class#MyModel#0" expanded="false" />
+            <element signature="method#loadMaze#0;class#MyModel#0" expanded="false" />
+            <element signature="method#solveMaze#0;class#MyModel#0" expanded="false" />
+            <element signature="method#legal_move#0;class#MyModel#0" expanded="false" />
+            <element signature="e#10969#10970#0" expanded="false" />
+            <element signature="e#11013#11014#0" expanded="false" />
+            <element signature="method#mute#0;class#MyModel#0" expanded="false" />
+            <element signature="method#music#0;class#MyModel#0" expanded="false" />
+            <element signature="e#12351#12352#0" expanded="false" />
+            <element signature="e#12376#12377#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/scene/image/Image.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="1109" column="0" lean-forward="false" selection-start-line="1109" selection-start-column="0" selection-end-line="1109" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/javafx/beans/value/ObservableObjectValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="42" column="6" lean-forward="false" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/javafx-src.zip!/com/sun/glass/ui/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="936" column="0" lean-forward="false" selection-start-line="936" selection-start-column="0" selection-end-line="936" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/About.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MyViewStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MazeDisplayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1344">
+          <caret line="88" column="25" lean-forward="false" selection-start-line="88" selection-start-column="25" selection-end-line="88" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#MazeDisplayer#0;class#MazeDisplayer#0" expanded="false" />
+            <element signature="method#setMaze#0;class#MazeDisplayer#0" expanded="false" />
+            <element signature="method#setSolution#0;class#MazeDisplayer#0" expanded="false" />
+            <element signature="method#setCharacterPosition#0;class#MazeDisplayer#0" expanded="false" />
+            <element signature="method#setImageFileNameCharacter#0;class#MazeDisplayer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Model/IModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="18" column="8" lean-forward="false" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/MyView.fxml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="61" column="160" lean-forward="false" selection-start-line="61" selection-start-column="160" selection-end-line="61" selection-end-column="160" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/View/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/View/MyViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="224" column="18" lean-forward="false" selection-start-line="224" selection-start-column="18" selection-end-line="224" selection-end-column="18" />
+        <state relative-caret-position="-1095">
+          <caret line="51" column="57" lean-forward="false" selection-start-line="51" selection-start-column="57" selection-end-line="51" selection-end-column="57" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#setViewModel#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#bindProperties#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#update#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#generateMaze#0;class#MyViewController#0" expanded="false" />
             <element signature="method#solveMaze#0;class#MyViewController#0" expanded="false" />
             <element signature="method#hideSolution#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#showAlert#0;class#MyViewController#0" expanded="false" />
             <element signature="method#showFinishedGameAlert#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#KeyPressed#0;class#MyViewController#0" expanded="false" />
-            <element signature="method#goal_reached#0;class#MyViewController#0" expanded="false" />
-            <element signature="e#9632#9633#0" expanded="true" />
-            <element signature="e#9681#9682#0" expanded="true" />
-            <element signature="e#9741#9742#0" expanded="true" />
-            <element signature="e#9784#9785#0" expanded="true" />
-            <element signature="e#9834#9835#0" expanded="true" />
-            <element signature="e#9886#9887#0" expanded="true" />
-            <element signature="e#9949#9950#0" expanded="true" />
-            <element signature="e#9995#9996#0" expanded="true" />
+            <element signature="e#9362#9363#0" expanded="true" />
+            <element signature="e#9411#9412#0" expanded="true" />
+            <element signature="e#9471#9472#0" expanded="true" />
+            <element signature="e#9514#9515#0" expanded="true" />
+            <element signature="e#9564#9565#0" expanded="true" />
+            <element signature="e#9616#9617#0" expanded="true" />
+            <element signature="e#9679#9680#0" expanded="true" />
+            <element signature="e#9725#9726#0" expanded="true" />
             <element signature="method#setResizeEvent#0;class#MyViewController#0" expanded="false" />
             <element signature="method#properties#0;class#MyViewController#0" expanded="false" />
             <element signature="method#saveMaze#0;class#MyViewController#0" expanded="false" />
             <element signature="method#loadMaze#0;class#MyViewController#0" expanded="false" />
             <element signature="method#About#0;class#MyViewController#0" expanded="false" />
             <element signature="method#Help#0;class#MyViewController#0" expanded="false" />
-            <element signature="e#14862#14912#0" expanded="false" />
+            <element signature="e#14592#14642#0" expanded="false" />
             <element signature="method#exit#0;class#MyViewController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ViewModel/MyViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1113">
+          <caret line="67" column="78" lean-forward="false" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
+          <folding>
+            <element signature="method#loadMaze#0;class#MyViewModel#0" expanded="false" />
           </folding>
         </state>
       </provider>

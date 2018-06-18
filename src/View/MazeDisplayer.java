@@ -5,21 +5,17 @@ import algorithms.mazeGenerators.Position;
 import algorithms.search.AState;
 import algorithms.search.MazeState;
 import algorithms.search.Solution;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class MazeDisplayer extends Canvas {
 
@@ -30,7 +26,7 @@ public class MazeDisplayer extends Canvas {
     private int goalPositionColumn;
     private Position goal_pos;
     private Solution solution;
-    boolean isGenerated = false;
+    private boolean isGenerated = false;
     boolean wantSolution = false;
 
 
@@ -57,7 +53,6 @@ public class MazeDisplayer extends Canvas {
             solution = sol;
             wantSolution = true;
             redraw();
-            //wantSolution = false;
         }
     }
 
@@ -68,12 +63,6 @@ public class MazeDisplayer extends Canvas {
             wantSolution = true;
         redraw();
     }
-
-/*    public void setGoalPosition (int row, int column) {
-        goalPositionRow = row;
-        goalPositionColumn = column;
-        redraw();
-    }*/
 
     public void redraw() {
         if (maze != null) {
@@ -86,26 +75,24 @@ public class MazeDisplayer extends Canvas {
                 Image wallImage = new Image(new FileInputStream(ImageFileNameWall.get()));
                 Image characterImage = new Image(new FileInputStream(ImageFileNameCharacter.get()));
                 Image goalImage = new Image(new FileInputStream(ImageFileGoal.get()));
+                Image mazeImage = new Image(new FileInputStream(ImageFileMaze.get()));
+                Image ballImage = new Image(new FileInputStream(ImageFileBall.get()));
 
                 GraphicsContext gc = getGraphicsContext2D();
-                gc.clearRect(0, 0, getWidth(), getHeight());
+                gc.drawImage(mazeImage, 0, 0, getWidth(), getHeight());
                 //Draw Maze
+                gc.setFill(Color.TRANSPARENT);
                 for (int i = 0; i < maze.length; i++) { // i == row - y axis
                     for (int j = 0; j < maze[i].length; j++) { // j == col - x axis
                         if (maze[i][j] == 1) {
                             gc.drawImage(wallImage, j * cellWidth, i* cellHeight, cellWidth, cellHeight);
                         }
-                        else {
-                            gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
-                        }
                         if (wantSolution && isGenerated) {
-                            //wantSolution = false;
-                            gc.setFill(Color.RED);
                             List<AState> drawSol = solution.getSolutionPath();
                             for (int k = 0; k < drawSol.size(); k++) {
                                 MazeState state =(MazeState) drawSol.get(k);
                                 if ((state.getPosition().getColumnIndex() == j && state.getPosition().getRowIndex() == i)) {
-                                    gc.fillRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
+                                    gc.drawImage(ballImage,j * cellWidth, i * cellHeight, cellWidth*1.1, cellHeight*1.1);
                                     break;
                                 }
                             }
@@ -119,16 +106,7 @@ public class MazeDisplayer extends Canvas {
                         }
                     }
                 }
-                //wantSolution = false;
-                //Draw Character
-                //gc.setFill(Color.RED);
-                //gc.fillOval(characterPositionColumn * cellHeight, characterPositionRow * cellWidth, cellHeight, cellWidth);
-                //gc.drawImage(characterImage, characterPositionColumn * cellWidth, characterPositionRow * cellHeight, cellWidth, cellHeight);
-                //gc.drawImage(goalImage, goalPositionColumn * cellWidth, goalPositionRow * cellHeight, cellWidth, cellHeight);
-
-            } catch (FileNotFoundException e) {
-                //e.printStackTrace();
-            }
+            } catch (FileNotFoundException e) { e.printStackTrace(); }
         }
     }
 
@@ -136,27 +114,37 @@ public class MazeDisplayer extends Canvas {
     private StringProperty ImageFileNameWall = new SimpleStringProperty();
     private StringProperty ImageFileNameCharacter = new SimpleStringProperty();
     private StringProperty ImageFileGoal = new SimpleStringProperty();
+    private StringProperty ImageFileMaze = new SimpleStringProperty();
+    private StringProperty ImageFileBall = new SimpleStringProperty();
 
     public String getImageFileNameWall() {
         return ImageFileNameWall.get();
+    }
+    public String getImageFileBall() {
+        return ImageFileBall.get();
+    }
+    public String getImageFileMaze() {
+        return ImageFileMaze.get();
+    }
+    public String getImageFileGoal() {
+        return ImageFileGoal.get();
+    }
+    public String getImageFileNameCharacter() {
+        return ImageFileNameCharacter.get();
     }
 
     public void setImageFileNameWall(String imageFileNameWall) {
         this.ImageFileNameWall.set(imageFileNameWall);
     }
-
+    public void setImageFileBall(String imageFileBall) {
+        this.ImageFileBall.set(imageFileBall);
+    }
+    public void setImageFileMaze(String imageFileMaze) {
+        this.ImageFileMaze.set(imageFileMaze);
+    }
     public void setImageFileGoal(String imageFileGoal) {
         this.ImageFileGoal.set(imageFileGoal);
     }
-
-    public String getImageFileGoal() {
-        return ImageFileGoal.get();
-    }
-
-    public String getImageFileNameCharacter() {
-        return ImageFileNameCharacter.get();
-    }
-
     public void setImageFileNameCharacter(String imageFileNameCharacter) {
         this.ImageFileNameCharacter.set(imageFileNameCharacter);
     }
